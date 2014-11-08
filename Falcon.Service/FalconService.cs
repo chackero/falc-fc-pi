@@ -25,5 +25,33 @@ namespace Falcon.Service
             //unitOfWork.MemberRepository.Add(freelancer);
             unitOfWork.Commit();
         }
+
+        public void EditFreelancer(Freelancer freelancer)
+        {
+            unitOfWork.FreelancerRepository.Update(freelancer);
+            unitOfWork.Commit();
+        }
+
+        public Freelancer GetFreelancerById(int id)
+        {
+            return unitOfWork.FreelancerRepository.Get(f => f.idMember.Equals(id));
+        }
+
+        public Freelancer GetFreelancerByUsername(string username)
+        {
+            return unitOfWork.FreelancerRepository.Get(f => f.Member.username.Equals(username));
+        }
+
+        public void AddCv(Freelancer freelancer, CV cv)
+        {
+            freelancer.CV = cv;
+            unitOfWork.Commit();
+        }
+
+        public void EditCv(Freelancer freelancer, CV cv)
+        {
+            freelancer.CV = cv;
+            unitOfWork.Commit();
+        }
     }
 }
