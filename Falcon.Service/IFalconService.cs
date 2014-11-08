@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Falcon.Data.Infrastructure;
@@ -10,8 +11,9 @@ namespace Falcon.Service
 {
     interface IFalconService
     {
-       
+
         //Freelancers
+        #region freelancers
         void AddFreelancer(Freelancer freelancer);
         
         void EditFreelancer(Freelancer freelancer);
@@ -20,11 +22,23 @@ namespace Falcon.Service
         Freelancer GetFreelancerByUsername(String username);
         void AddCv(Freelancer freelancer, CV cv);
         void EditCv(Freelancer freelancer, CV cv);
-        /*
+        void ApplyForMission(Freelancer freelancer, Mission mission);
+        void UnApplyForMission(Freelancer freelancer, Mission mission);
         void AddCircle(Freelancer freelancer,Circle circle);
         void EditCirlce(Freelancer freelancer, Circle circle);
         void JoinCirlce(Freelancer freelancer, Circle circle);
-        */
+        #endregion
 
+        #region owners
+
+        void AddOwner(Owner owner);
+        void EditOwner(Owner owner);
+        Owner GetOwnerById(int idOwner);
+        Owner GetOwnerByUsername(String username);
+        void AddMission(Mission mission);
+        void EditMission(Mission mission);
+        void PickAFreelancer(Mission mission, Freelancer freelancer);
+
+        #endregion
     }
 }
