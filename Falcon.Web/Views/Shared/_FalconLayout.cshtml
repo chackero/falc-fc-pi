@@ -1,0 +1,210 @@
+﻿@using System.Collections.Specialized
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:300,400,700&amp;subset=latin,latin-ext" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+    <link href="~/Content/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/font-awesome-ie7.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/css/bootstrap-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/reset.css" />
+    <link id="color_css" rel="stylesheet" type="text/css" href="~/Content/css/color_scheme_1.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/jquery.combosex.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/jquery.flexslider.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/jquery.scrollbar.css" />
+    <script type="text/javascript" src="~/Content/js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui.1.7.2.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.combosex.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.easytabs.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.gmap.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.scrollbar.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jQuery.menutron.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/custom.js"></script>
+</head>
+<body>
+    <!-- Bar -->
+    <div id="bar">
+        <div class="inner">
+
+            <!-- Language Menu -->
+            <ul id="lang-menu">
+                <li id="fr"><a href="#">Falcon Freelance Community</a></li>
+            </ul>
+            <!-- /Language Menu -->
+            <!-- User Menu -->
+            <ul id="user-menu">
+                <li id="login" class="first"><a href="#">Login</a></li>
+                <li id="register"><a href="#">Register</a></li>
+                <li id="bookmarks" class="last"><a href="#">Bookmarks</a></li>
+            </ul>
+            <!-- /User Menu -->
+
+        </div>
+    </div>
+    <!-- /Bar -->
+    <!-- Header -->
+    <div id="header">
+        <div class="inner">
+
+            <!-- Logo -->
+            <div id="logo"> <a href="index.html"><img src="~/Content/images/Logo.png" width="205" height="50" alt="logo" /></a><a class="menu-hider"></a></div>
+            <!-- /Logo -->
+
+            <ul id="navigation">
+                <li class="current"> <a href="index.html">Home</a></li>
+                <li class="first expanded">
+                    <a href="jobs.html">Missions</a>
+                    <ul class="submenu">
+                        <li><a href="jobs.html">Latest Missions</a></li>
+                        <li><a href="job.html">Search For A Mission</a></li>
+                        <li><a href="job.html">Create A Mission</a></li>
+                    </ul>
+                </li>
+                <li class="first expanded">
+                    <a href="candidates-listing.html">Freelancers</a>
+                    <ul class="submenu">
+                        <li><a href="candidates-listing.html">Random Freelancers</a></li>
+                        <li><a href="candidates-listing-no-sidebar.html">Search For A Freelancer</a></li>
+                    </ul>
+                </li>
+                <li><a href="partners.html">Partners</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="contacts.html">Contact</a></li>
+            </ul>
+            <div class="reponsive-nav">
+                <select class="select" name="menu1" id="menu1">
+                    <option value="index.html">Home</option>
+                    <option value="jobs.html">Missions</option>
+                    <option value="job.html">Freelancers</option>
+                    <option value="job.html">Social Network</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- /Header -->
+    <!-- Search -->
+    <div id="search">
+        <div class="inner">
+            <form id="search-form" action="index.html" class="search-bar-home">
+                <div class="seach-head"><img src="~/Content/images/list-ico.png" alt="" /><span> I am looking for a</span></div>
+                <select id="search-select" class="select">
+                    <option selected="selected" value="Candidate">Mission</option>
+                    <option value="Recruiter">Freelancer</option>
+                </select>
+                <label class="in">by</label>
+                <input type="text" placeholder="Name/Title" class="textfield-with-callback" />
+                <input type="text" placeholder="Category / Target Missions" class="textfield-with-callback" />
+                <input type="submit" value="Search" id="search-submit" class="pull-right" />
+            </form>
+            <div id="more-options"></div>
+            <div class="clear"></div>
+            <!-- Clear Line -->
+
+            <div id="options">
+            </div>
+        </div>
+    </div>
+    <!-- /Search -->
+    <!-- Content -->
+    <div id="content">
+        @RenderBody()
+    </div>
+    <!-- /Content -->
+    <!-- Footer -->
+    <div id="footer">
+        <section class="row-fluid">
+            @RenderSection("stories",required:false)
+            <section class="footer-wrapper">
+                <section class="row-fluid">
+                    <section class="inner">
+                        <div id="site-description">
+                            <h3><img src="~/Content/images/Logo.png" width="205" height="50" alt="" /></h3>
+                            <p>Falcon Freelancer Community is a project devlopment by Esprit 4 ERP-BI 1 Students.</p>
+                        </div>
+                        <div id="footer-menu">
+                            <div id="nav-menu" class="footer-menu">
+                                <h2>Navigation</h2>
+                                <div class="left">
+                                    <ul>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="job-listing-1.html">Missions</a></li>
+                                        <li><a href="partners.html">Freelancers</a></li>
+                                        <li><a href="about-us.html">About Us</a></li>
+                                    </ul>
+                                </div>
+                                <div class="right">
+                                    <ul>
+                                        <li><a href="contacts.html">Contact Us</a></li>
+                                        <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+                                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="fol-menu" class="footer-menu">
+                                <h2>Follow Us</h2>
+                                <ul>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Twitter</a></li>
+                                    <li><a href="#">Facebook</a></li>
+                                    <li><a href="#">Youtube</a></li>
+                                </ul>
+                            </div>
+                            <div id="job-menu" class="footer-menu">
+                                <h2>Popular Jobs</h2>
+                                <ul>
+                                    <li><a href="#">Web Developer</a></li>
+                                    <li><a href="#">Web Designer</a></li>
+                                    <li><a href="#">UX Engineer</a></li>
+                                    <li><a href="#">Account Manager</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </div>
+    <!-- /Footer -->
+    <div class="clearfix"></div>
+    <!-- Copyright -->
+    <div id="copyright">
+        <div class="inner">
+            <div class="row-fluid">
+                <!-- Copyright Text -->
+                <div id="copyright-text">Copyright 2014 <a href="http://uouapps.com/careers">Falcon(c) </a> | All Rights Reserved | Developpement by Esprit EE Team</div>
+                <!-- /Copyright Text -->
+                <!-- Copyright Social Link -->
+                <div id="copyright-link">
+                    <div class="buttons">
+                        <ul class="top_soical_icons pull-right	">
+                            <li> <a href="#"> <i class="fa fa-facebook"></i> </a> </li>
+                            <li> <a href="#"> <i class="fa fa-google-plus"></i> </a> </li>
+                            <li> <a href="#"> <i class="fa fa-twitter"></i> </a> </li>
+                            <li> <a href="#"> <i class="fa fa-linkedin-square"></i> </a> </li>
+                            <li> <a href="#"> <i class="fa fa-pinterest"></i> </a> </li>
+                            <li> <a href="#"> <i class="fa fa-dribbble"></i> </a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /Copyright Social Link -->
+
+                <a class="scrollTop" href="#header" style="display: none;">
+                    <div id="up_container"> <span></span> </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- /Copyright -->
+        @RenderSection("scripts", required: false)
+</body>
+</html>
