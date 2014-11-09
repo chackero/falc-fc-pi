@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
-using Falcon.Domain.Models;
+﻿using Falcon.Domain.Models;
 using Falcon.Service;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace Falcon.Test
 {

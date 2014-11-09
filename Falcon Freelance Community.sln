@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Falcon.Service", "Falcon.Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Falcon.Test", "Falcon.Test\Falcon.Test.csproj", "{A32E4CAC-B339-45C2-A040-DDD02C8710A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Falcon.Web", "Falcon.Web\Falcon.Web.csproj", "{77A351BC-A854-4A06-8226-83CA9CC5C034}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Falcon.Web.Tests", "Falcon.Web.Tests\Falcon.Web.Tests.csproj", "{828A5E03-F86A-40DA-A85F-3E0F766E53DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{A32E4CAC-B339-45C2-A040-DDD02C8710A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A32E4CAC-B339-45C2-A040-DDD02C8710A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A32E4CAC-B339-45C2-A040-DDD02C8710A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77A351BC-A854-4A06-8226-83CA9CC5C034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77A351BC-A854-4A06-8226-83CA9CC5C034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77A351BC-A854-4A06-8226-83CA9CC5C034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77A351BC-A854-4A06-8226-83CA9CC5C034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{828A5E03-F86A-40DA-A85F-3E0F766E53DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{828A5E03-F86A-40DA-A85F-3E0F766E53DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{828A5E03-F86A-40DA-A85F-3E0F766E53DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{828A5E03-F86A-40DA-A85F-3E0F766E53DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

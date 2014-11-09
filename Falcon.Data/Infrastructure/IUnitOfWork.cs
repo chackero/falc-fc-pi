@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Falcon.Data.Repositories;
+﻿using Falcon.Data.Repositories;
+using System;
 
 namespace Falcon.Data.Infrastructure
 {

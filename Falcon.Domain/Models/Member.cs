@@ -29,5 +29,6 @@ namespace Falcon.Domain.Models
         public virtual Freelancer Freelancer { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual Owner Owner { get; set; }
+
     }
 }

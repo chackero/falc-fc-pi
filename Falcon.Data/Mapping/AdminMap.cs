@@ -1,6 +1,6 @@
+using Falcon.Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using Falcon.Domain.Models;
 
 namespace Falcon.Data.Mapping
 {
