@@ -1,10 +1,11 @@
+using System.Data.Entity;
 using Falcon.Data.Mapping;
 using Falcon.Domain.Models;
-using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Falcon.Data
 {
-    public partial class FalconDbContext : DbContext
+    public class FalconDbContext : DbContext
     {
         static FalconDbContext()
         {
@@ -51,6 +52,39 @@ namespace Falcon.Data
             modelBuilder.Configurations.Add(new OwnerMap());
             modelBuilder.Configurations.Add(new PostMap());
             modelBuilder.Configurations.Add(new PrivateMessageMap());
+        }
+        public static FalconDbContext Create()
+        {
+            return new FalconDbContext();
+        }
+    }
+
+    public class CustomRole : IdentityRole<int, CustomUserRole>
+    {
+        public CustomRole()
+        {
+        }
+
+        public CustomRole(string name)
+        {
+            Name = name;
+        }
+    }
+
+    public class CustomUserStore : UserStore<Member, CustomRole, int,
+        CustomUserLogin, CustomUserRole, CustomUserClaim>
+    {
+        public CustomUserStore(FalconDbContext context)
+            : base(context)
+        {
+        }
+    }
+
+    public class CustomRoleStore : RoleStore<CustomRole, int, CustomUserRole>
+    {
+        public CustomRoleStore(FalconDbContext context)
+            : base(context)
+        {
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Falcon.Domain.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace Falcon.Web.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual Member Member { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
