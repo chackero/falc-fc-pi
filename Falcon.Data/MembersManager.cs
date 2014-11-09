@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Falcon.Domain.Models;
+﻿using Falcon.Domain.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Falcon.Data
 {
@@ -55,6 +51,8 @@ namespace Falcon.Data
             return manager; 
 
         }
+
+
     }
     public class MembersSignInManager : SignInManager<Member, int>
     {

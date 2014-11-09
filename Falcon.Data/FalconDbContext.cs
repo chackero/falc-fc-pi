@@ -1,11 +1,13 @@
-using System.Data.Entity;
+using System.Threading;
 using Falcon.Data.Mapping;
 using Falcon.Domain.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace Falcon.Data
 {
-    public class FalconDbContext : DbContext
+    public class FalconDbContext : IdentityDbContext<Member, CustomRole,
+        int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         static FalconDbContext()
         {
@@ -16,7 +18,7 @@ namespace Falcon.Data
             : base("Name=falcondbContext")
         {
         }
-
+        
         public DbSet<Admin> Admins { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -28,7 +30,7 @@ namespace Falcon.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<Freelancer> Freelancers { get; set; }
         public DbSet<hibernate_sequences> hibernate_sequences { get; set; }
-        public DbSet<Member> Members { get; set; }
+        //public DbSet<Member> Members { get; set; }
         public DbSet<Mission> Missions { get; set; }
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Post> Posts { get; set; }
@@ -63,6 +65,7 @@ namespace Falcon.Data
     {
         public CustomRole()
         {
+            
         }
 
         public CustomRole(string name)
@@ -87,4 +90,5 @@ namespace Falcon.Data
         {
         }
     }
+
 }
