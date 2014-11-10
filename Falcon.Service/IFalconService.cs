@@ -34,5 +34,11 @@ namespace Falcon.Service
         void PickAFreelancer(Mission mission, Freelancer freelancer);
 
         #endregion
+
+        #region missions
+
+        Mission getMissionById(int id);
+
+        #endregion
     }
 }

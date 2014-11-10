@@ -44,7 +44,6 @@ namespace Falcon.Test
         }
 
         [TestMethod]
-        [Ignore]
         public void TestMissions()
         {
             var m = new Member
@@ -63,8 +62,8 @@ namespace Falcon.Test
                 Owner = o
             };
             var service = new FalconService();
-            var freelancer=service.GetFreelancerById(4);
-            var freelancer2 = service.GetFreelancerById(5);
+            var freelancer=service.GetFreelancerById(2);
+            var freelancer2 = service.GetFreelancerById(2);
             mission.Freelancers.Add(freelancer); mission.Freelancers.Add(freelancer2);
             mission.Freelancer = freelancer;
             service.AddMission(mission);

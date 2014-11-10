@@ -132,6 +132,11 @@ namespace Falcon.Service
             unitOfWork.Commit();
         }
 
+        public Mission getMissionById(int id)
+        {
+            return unitOfWork.MissionRepository.GetById(id);
+        }
+
         #endregion
     }
 }
