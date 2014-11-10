@@ -13,28 +13,28 @@
 
 /** CSS Table of Content 
 	-  	Common Elements		 											    Line 	40 to 94
-    -  	Language Menu	 										            Line 	96 to 106
-    -  	Header Section 									  					Line 	108 to 146
-    -   Block Section											   			Line 	146 to 169
-    -   Job Page Section													Line 	170 to 205
-    -   Login Panel   											    		Line 	205 to 248
-    -	Social Media Icons													Line    271 to 287
-    -	Stories																Line    289 to 302
-    -   Job Explorer Section										    	Line    302 to 346
-    -   About Page 														    Line    348 to 363
-    -   Partners Page														Line    365 to 385
-    -   Contact Page														Line    387 to 407
-    -   About Page															Line    230 to 290
-    -   Filter Jobs 														Line    409 to 452
-    -   Job Navigation											          	Line    454 to 490
-    -   Latest Jobs															Line    492 to 598
-    -   Recruiter Block												        Line    600 to 626
-    -   Footer										                    	Line    628 to 267
-    -   Css for Tablets														Line    669 to 769
-    -   Css for Mini Tablets & Mobile 										Line    773 to 907
-    -   Css for Tablets														Line    669 to 769
-    -   Css for Mobile  													Line    909 to 1102
-    -   Generic Css    													    Line    1008 to 1145
+	-  	Language Menu	 										            Line 	96 to 106
+	-  	Header Section 									  					Line 	108 to 146
+	-   Block Section											   			Line 	146 to 169
+	-   Job Page Section													Line 	170 to 205
+	-   Login Panel   											    		Line 	205 to 248
+	-	Social Media Icons													Line    271 to 287
+	-	Stories																Line    289 to 302
+	-   Job Explorer Section										    	Line    302 to 346
+	-   About Page 														    Line    348 to 363
+	-   Partners Page														Line    365 to 385
+	-   Contact Page														Line    387 to 407
+	-   About Page															Line    230 to 290
+	-   Filter Jobs 														Line    409 to 452
+	-   Job Navigation											          	Line    454 to 490
+	-   Latest Jobs															Line    492 to 598
+	-   Recruiter Block												        Line    600 to 626
+	-   Footer										                    	Line    628 to 267
+	-   Css for Tablets														Line    669 to 769
+	-   Css for Mini Tablets & Mobile 										Line    773 to 907
+	-   Css for Tablets														Line    669 to 769
+	-   Css for Mobile  													Line    909 to 1102
+	-   Generic Css    													    Line    1008 to 1145
 	
 
 **/
@@ -695,7 +695,7 @@ div#search-and-sort { height: auto !important; float: left !important; }
 div#our-partners div.partner { height: 207px !important; width: 220px !important; }
 .part-img { width: 220px !important; }
 .candidate-meta.meta-fields li { font-size: 12px !important; }
-.btn.gray.jobbtn { width: 146px; }
+.btn.gray.jobbtn {background: darkgreen; width: 146px; }
 .job-video iframe { max-width: 335px; height: auto; }
 .seach-head { display: none; }
 ul#navigation li a { padding: 20px 10px; }
@@ -958,7 +958,7 @@ div#latest-job div.company-text { height: 73px; overflow: hidden; }
 .recruiter_info .social_media_icons i { left: 0px; }
 .page-nav .span3 { float: left; }
 .video-container iframe { height: auto; max-width: 236px; width: 100%; }
-.page-nav .btn { font-size: 9px; float: left; }
+.page-nav .btn { font-size: 9px; float: left;}
 .recruiter_photo { float: none !important; }
 div#title h1.job_page { font-size: 10px !important; }
 .page-nav .span3 { float: left; }
@@ -1186,7 +1186,7 @@ text-transform: uppercase; font-weight: bold; }
 .social_media_icons a { margin-right: 6px; display: inline-block; border-radius: 3px; background-color: rgb( 235, 235, 235 ); box-shadow: 0px 2px 0px 0px rgb( 204, 204, 204 ); width: 31px; height: 31px; }
 .social_media_icons a:hover { background: #259bc7; }
 .social_media_icons i { color: #FFFFFF; font-size: 15px; left: 9px; position: relative; text-align: center; top: 3px; }
-.page-nav .btn { background-color: #EBEBEB !important; border-radius: 3px 3px 3px 3px; box-shadow: 0 0 0 !important; border-bottom: 3px solid #cccccc; text-transform: uppercase; border-top: none; border-left: none; border-right: none; }
+.page-nav .btn { background-color: #6aa579 !important; border-radius: 3px 3px 3px 3px; box-shadow: 0 0 0 !important; border-bottom: 3px solid #cccccc; text-transform: uppercase; border-top: none; border-left: none; border-right: none; }
 .social_media_icons.job { margin-top: 10px; display: none; }
 .page-nav .next-btn:hover, .page-nav .pre-btn:hover, .jobbtn:hover { background: #259bc7 !important; border-bottom: 3px solid #1b799c !important; }
 .page-nav .next-btn, .page-nav .pre-btn { width: 89px; }

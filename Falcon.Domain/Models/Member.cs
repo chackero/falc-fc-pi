@@ -16,7 +16,14 @@ namespace Falcon.Domain.Models
             this.Posts = new List<Post>();
         }
 
-      
+        public override string UserName
+        {
+            get { return username; }
+            set { base.UserName = value;
+                username = value;
+            }
+        }
+
         public int idMember { get; set; }
         public int activation { get; set; }
         public string city { get; set; }
