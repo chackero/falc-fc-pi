@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Falcon.Service;
 
-namespace Falcon.Web.Models
+namespace Falcon.Web.Controllers
 {
     public class MissionController : Controller
     {
