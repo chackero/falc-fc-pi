@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNet.Identity
+@model Falcon.Web.Models.FreelancerProfileViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FalconLayout.cshtml";
+}
+
+<div id="title">
+    <h1 class="inner">
+        Welcome " @User.Identity.GetUserName() "  here you can create your profile
+    </h1>
+</div>
+
+<div class="inner">
+    
+    @using (Html.BeginForm("Create", "Freelancer", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="falcon-spacer"><h2>Please fill in all the fields.</h2></div>
+            
+        @Html.AntiForgeryToken()
+
+        <div class="block-content">
+            @Html.ValidationSummary("errors", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { placeholder ="Firstname", @class = "combosex_input textfield" } })
+            @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { placeholder = "Lastname", @class = "combosex_input textfield" } })
+            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { placeholder = "Address", @class = "combosex_input textfield" } })
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { placeholder = "City", @class = "combosex_input textfield" } })
+            <input type="submit" value="Create" class="falcon-green pull-right" />
+        </div>
+    }
+</div>
+
+<div class="clear"></div>
+<div class="falcon-spacer"></div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $(".combosex_input_span").on("focusout").prev("input").attr("value", $(".combosex_input_span").attr("value"));
+</script>

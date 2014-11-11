@@ -1,63 +1,87 @@
-﻿@using Falcon.Web.Models
-@model LoginViewModel
+﻿@using System.Web.UI.WebControls
+@model Falcon.Web.Models.LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Log In";
+    Layout = null;
 }
-
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+<head>
+    <!-- BEGIN META SECTION -->
+    <meta charset="utf-8">
+    <title>Login into Falcon Freelance Community</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="" name="description" />
+    <meta content="themes-lab" name="author" />
+    <!-- END META SECTION -->
+    <!-- BEGIN MANDATORY STYLE -->
+    <link href="~/Content/assets/css/icons/icons.min.css" rel="stylesheet">
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/assets/css/plugins.min.css" rel="stylesheet">
+    <link href="~/Content/assets/css/style.min.css" rel="stylesheet">
+    <link href="~/Content/css/font-awesome.css" rel="stylesheet">
+    <!-- END  MANDATORY STYLE -->
+    <!-- BEGIN PAGE LEVEL STYLE -->
+    <link href="~/Content/assets/css/animate-custom.css" rel="stylesheet">
+    <!-- END PAGE LEVEL STYLE -->
+    <script src="~/Content/assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+<body class="login fade-in" data-page="signup">
+    <!-- START SIGNUP BOX -->
+    <div class="container" id="login-block">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+                <div class="login-box clearfix animated flipInY">
+                    <div class="page-icon animated bounceInDown">
+                        <img src="~/Content/assets/img/account/user-icon.png" alt="Login icon" />
                     </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    <div class="login-logo">
+                        <a href="#">
+                            <img src="~/Content/assets/img/account/login-logo.png" alt="Company Logo" />
+                        </a>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+                    <hr>
+                    <div class="login-form">
+                        <!-- End Error box -->
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.TextBoxFor(m => m.Username, new { placeholder = "Username", @class = "input-field" })
+                            @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "input-field" })
+                            <label class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe) Keep me logged in
+                            </label>
+                            @Html.ValidationSummary("", new { @class = "alert alert-danger hide" })
+                            <button type="submit" class="btn btn-login">Login</button>
+                            }
+                            <div class="login-links">
+                                <a href="">Forgot password?</a>
+                                <br>
+                                <a href="@Url.Action("Register")">Don't have an account? <strong>Sign Up</strong></a>
+                            </div>
 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END SIGNUP BOX -->
+    <!-- BEGIN MANDATORY SCRIPTS -->
+    <script src="~/Content/assets/plugins/jquery-1.11.js"></script>
+    <script src="~/Content/assets/plugins/jquery-migrate-1.2.1.js"></script>
+    <script src="~/Content/assets/plugins/jquery-ui/jquery-ui-1.10.4.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <!-- END MANDATORY SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/Content/assets/plugins/backstretch/backstretch.min.js"></script>
+    <script src="~/Content/assets/js/account.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+</body>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<script>
+    $(document).ready(function () {
+        if (($(".alert-danger").find('li').first().css("display")) != "none") {
+            $(".alert-danger").prepend("<h4>Error!</h4>");
+            $(".alert-danger").removeClass("hide");
+        }
+    });
+    
+</script>
+@Scripts.Render("~/bundles/jqueryval")

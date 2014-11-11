@@ -3,14 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Falcon.Data;
+using Falcon.Domain.Models;
 using Falcon.Service;
+using Falcon.Web.Models;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Member = Falcon.Domain.Models.Member;
 
 namespace Falcon.Web.Controllers
 {
     public class FreelancerController : Controller
     {
         FalconService falconService = new FalconService();
+        public MembersManager UserManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().GetUserManager<MembersManager>();
+            }
+        }
         // GET: Freelancer
         public ActionResult Index()
         {
@@ -32,18 +45,20 @@ namespace Falcon.Web.Controllers
 
         // POST: Freelancer/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(FreelancerProfileViewModel model)
         {
-            try
+           if (!ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                return View(model);
             }
-            catch
+            var current = UserManager.Users.First(u => u.idMember.Equals(User.Identity.GetUserId<int>()));
+            var freelancer = new Freelancer
             {
-                return View();
-            }
+                Member = current
+            };
+            falconService.AddFreelancer(freelancer);
+            return RedirectToAction("Index");
+            
         }
 
         // GET: Freelancer/Edit/5

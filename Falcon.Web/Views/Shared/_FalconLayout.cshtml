@@ -1,5 +1,4 @@
-﻿@using System.Collections.Specialized
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -20,7 +19,6 @@
     <script type="text/javascript" src="~/Content/js/jquery.1.7.2.min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery-ui.1.7.2.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="~/Content/js/jquery.combosex.min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery.flexslider-min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery.mousewheel.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery.easytabs.min.js"></script>
@@ -42,9 +40,7 @@
             <!-- /Language Menu -->
             <!-- User Menu -->
             <ul id="user-menu">
-                <li id="login" class="first"><a href="#">Login</a></li>
-                <li id="register"><a href="#">Register</a></li>
-                <li id="bookmarks" class="last"><a href="#">Bookmarks</a></li>
+                @Html.Partial("~/Views/Shared/_FalconLoginPartial.cshtml")
             </ul>
             <!-- /User Menu -->
 
