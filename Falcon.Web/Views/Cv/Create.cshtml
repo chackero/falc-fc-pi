@@ -1,40 +1,42 @@
-﻿@using Microsoft.AspNet.Identity
-@model Falcon.Web.Models.FreelancerProfileViewModel
+﻿@model Falcon.Domain.Models.CV
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
 }
 
-
 <div class="main clearfix">
     <div class="content">
-        @using (Html.BeginForm("Create", "Freelancer", new { ViewBag.ReturnUrl }, FormMethod.Post))
+        @using (Html.BeginForm("Create", "Cv", new { ViewBag.ReturnUrl }, FormMethod.Post))
         {
 
-        <div class="post edit-company">
+            <div class="post edit-company">
                 <div class="post-header">
-                    <h2>Update your profile information</h2>
+                    <h2>Update your CV</h2>
                 </div>
                 <!-- .post-header -->
                 <ul>
-                    <li >
-                        
+                    <li>
+
                     </li>
                     <li class="settings-field">
-                        @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { placeholder = "Firstname" } })
-                    </li>
-                    <!-- .settings-field -->
-                    <li class="settings-field">
-                        @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { placeholder = "Lastname"} })
+                        @Html.EditorFor(model => model.personalStatement, new { htmlAttributes = new { placeholder = "Personal Statement" } })
                     </li>
                     <!-- .settings-field -->
                     <li class="settings-field">
-                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { placeholder = "Address"} })
+                        @Html.EditorFor(model => model.skills, new { htmlAttributes = new { placeholder = "Skills" } })
                     </li>
                     <!-- .settings-field -->
                     <li class="settings-field">
-                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { placeholder = "City" } })
+                        @Html.EditorFor(model => model.workExperience, new { htmlAttributes = new { placeholder = "Work Experience" } })
+                    </li>
+                    <!-- .settings-field -->
+                    <li class="settings-field">
+                        @Html.EditorFor(model => model.targetJobs, new { htmlAttributes = new { placeholder = "Target Jobs" } })
+                    </li>
+                    <li class="settings-field">
+                        <p>Upload your pdf</p>
+                        <input type="file" name="cvpdf"/>
                     </li>
                 </ul>
             </div>
@@ -77,3 +79,5 @@
     </aside>
     <!-- .sidebar -->
 </div>
+
+

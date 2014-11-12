@@ -4,13 +4,18 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
-
-        <li>@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+    <img class="avatar" alt="Avatar" src="~/Content/v2/images/avatar.png" />
+    <p>Hi, <span>@User.Identity.GetUserName()</span>!</p>
+    <ul class="user-options">
+        <li><a href="user_profile_settings.html">@Html.ActionLink("User Profile Settings !", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</a></li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    </ul>
     }
 }
 else
 {
-    <li id="register" class="first">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-    <li id="login">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <img class="avatar" alt="Avatar" src="~/Content/v2/images/login.png" />
+    <p><span>@Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { title = "Login" })</span></p>
+    <img class="avatar" alt="Avatar" src="~/Content/v2/images/register.png" />
+    <p><span>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { title = "Register" })</span></p>
 }

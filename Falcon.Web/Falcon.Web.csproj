@@ -169,6 +169,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CvController.cs" />
     <Compile Include="Controllers\FreelancerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -911,6 +912,7 @@
     <Content Include="Content\v2\images\featured-company.png" />
     <Content Include="Content\v2\images\link.png" />
     <Content Include="Content\v2\images\loadinfo.net.gif" />
+    <Content Include="Content\v2\images\login.png" />
     <Content Include="Content\v2\images\logo.png" />
     <Content Include="Content\v2\images\mail-bg.png" />
     <Content Include="Content\v2\images\no-results.png" />
@@ -918,6 +920,7 @@
     <Content Include="Content\v2\images\opening-location.png" />
     <Content Include="Content\v2\images\opening-logo.png" />
     <Content Include="Content\v2\images\password.png" />
+    <Content Include="Content\v2\images\register.png" />
     <Content Include="Content\v2\images\slide-phone.png" />
     <Content Include="Content\v2\images\slide-search-results.png" />
     <Content Include="Content\v2\images\slide1.jpg" />
@@ -1058,6 +1061,7 @@
     <Content Include="Views\Freelancer\Create.cshtml" />
     <Content Include="Views\Shared\_FalconLayout_v2.cshtml" />
     <Content Include="Views\Owner\Create.cshtml" />
+    <Content Include="Views\Cv\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

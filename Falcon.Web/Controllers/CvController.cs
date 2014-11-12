@@ -6,15 +6,12 @@ using System.Web.Mvc;
 using Falcon.Data;
 using Falcon.Domain.Models;
 using Falcon.Service;
-using Falcon.Web.Models;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Member = Falcon.Domain.Models.Member;
 
 namespace Falcon.Web.Controllers
 {
-    public class FreelancerController : Controller
+    public class CvController : Controller
     {
         FalconService falconService = new FalconService();
         public MembersManager UserManager
@@ -24,49 +21,50 @@ namespace Falcon.Web.Controllers
                 return HttpContext.GetOwinContext().GetUserManager<MembersManager>();
             }
         }
-        // GET: Freelancer
+        // GET: Cv
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Freelancer/Details/5
+        // GET: Cv/Details/5
         public ActionResult Details(int id)
         {
-            var freelancer = falconService.GetFreelancerById(id);
-            return View(freelancer);
+            return View();
         }
 
-        // GET: Freelancer/Create
+        // GET: Cv/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Freelancer/Create
+        // POST: Cv/Create
         [HttpPost]
-        public ActionResult Create(FreelancerProfileViewModel model)
+        public ActionResult Create(CV model, HttpPostedFileBase mypdf)
         {
-           if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var freelancer = new Freelancer
+            var freelancer = falconService.GetFreelancerById(User.Identity.GetUserId<int>());
+            string savePath = "~/Content/Falcon/PDF";
+            string fileName = mypdf.FileName;
+            var doc = new Document
             {
-                Member = UserManager.FindById(User.Identity.GetUserId<int>())
+                path = mypdf.FileName
             };
-            falconService.AddFreelancer(freelancer);
+            falconService.AddCv(freelancer,model);
             return RedirectToAction("Index");
-            
         }
 
-        // GET: Freelancer/Edit/5
+        // GET: Cv/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Freelancer/Edit/5
+        // POST: Cv/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -82,13 +80,13 @@ namespace Falcon.Web.Controllers
             }
         }
 
-        // GET: Freelancer/Delete/5
+        // GET: Cv/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Freelancer/Delete/5
+        // POST: Cv/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
