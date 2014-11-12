@@ -1,5 +1,10 @@
-﻿using Falcon.Data.Infrastructure;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Falcon.Data.Infrastructure;
+using Falcon.Data.Migrations;
 using Falcon.Domain.Models;
+using WebGrease.Css.Extensions;
 
 namespace Falcon.Service
 {
@@ -137,6 +142,56 @@ namespace Falcon.Service
             return unitOfWork.MissionRepository.GetById(id);
         }
 
+        #endregion
+
+        //Category Region
+        #region
+        
+
+        public void AddCategory(Category category)
+        {
+         unitOfWork.CategoryRepository.Add(category);
+         unitOfWork.Commit();
+        }
+
+        public void EditCategry(Category category)
+        {
+            unitOfWork.CategoryRepository.Update(category);
+            unitOfWork.Commit();
+        }
+
+        public Category GetCategoryById(int idCategory)
+        {
+            return unitOfWork.CategoryRepository.Get(p => p.idCategory == idCategory);
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            unitOfWork.CategoryRepository.Delete(category);
+        }
+
+        public List<Category> GetCategories()
+        {
+            return unitOfWork.CategoryRepository.GetAll().ToList();
+        }
+
+        public List<Category> GetCategoriesByName(string name)
+        {
+            return unitOfWork.CategoryRepository.GetMany(p => p.name == name).ToList();
+        }
+
+
+
+        #endregion
+
+        //CV Region
+        #region
+
+        public void AddCv(CV cv)
+        {
+            unitOfWork.CvRepository.Add(cv);
+            unitOfWork.Commit();
+        }
         #endregion
     }
 }
