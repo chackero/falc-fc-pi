@@ -24,7 +24,8 @@ namespace Falcon.Domain.Models
             }
         }
 
-        public int idMember { get; set; }
+        public override int Id { get; set; }
+        public int idMember { get { return this.Id; } }
         public int activation { get; set; }
         public string city { get; set; }
         public string country { get; set; }

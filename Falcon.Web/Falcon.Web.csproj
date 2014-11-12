@@ -891,6 +891,7 @@
     <Content Include="Content\js\jQuery.menutron.js" />
     <Content Include="Content\js\jquery.mousewheel.js" />
     <Content Include="Content\js\jquery.scrollbar.min.js" />
+    <Content Include="Content\js\jquery.steps.js" />
     <Content Include="Content\js\modernizr.js" />
     <Content Include="Content\js\switcher.js" />
     <Content Include="favicon.ico" />

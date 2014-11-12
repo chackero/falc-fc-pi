@@ -29,6 +29,7 @@ namespace Falcon.Data.Infrastructure
 
         public virtual void Add(T entity)
         {
+            dbset.Attach(entity);
             dbset.Add(entity);
         }
         public virtual void Update(T entity)

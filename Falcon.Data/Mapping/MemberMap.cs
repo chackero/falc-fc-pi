@@ -8,7 +8,7 @@ namespace Falcon.Data.Mapping
         public MemberMap()
         {
             // Primary Key
-            this.HasKey(t => t.idMember);
+            this.HasKey(t => t.Id);
 
             // Properties
             this.Property(t => t.city)
@@ -39,7 +39,9 @@ namespace Falcon.Data.Mapping
             this.Ignore(t => t.username);
             // Table & Column Mappings
             this.ToTable("Member");
-            this.Property(t => t.idMember).HasColumnName("idMember");
+            this.Property(t => t.Id).HasColumnName("idMember");
+            this.Ignore(t => t.idMember);
+            //this.Property(t => t.idMember).HasColumnName("idMember");
             this.Property(t => t.activation).HasColumnName("activation");
             this.Property(t => t.city).HasColumnName("city");
             this.Property(t => t.country).HasColumnName("country");

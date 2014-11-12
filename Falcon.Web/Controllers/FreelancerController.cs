@@ -51,10 +51,9 @@ namespace Falcon.Web.Controllers
             {
                 return View(model);
             }
-            var current = UserManager.Users.First(u => u.idMember.Equals(User.Identity.GetUserId<int>()));
             var freelancer = new Freelancer
             {
-                Member = current
+                idMember = User.Identity.GetUserId<int>()
             };
             falconService.AddFreelancer(freelancer);
             return RedirectToAction("Index");

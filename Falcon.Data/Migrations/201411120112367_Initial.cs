@@ -22,6 +22,7 @@ namespace Falcon.Data.Migrations
                 c => new
                     {
                         idMember = c.Int(nullable: false, identity: true),
+                        UserName = c.String(),
                         activation = c.Int(nullable: false),
                         city = c.String(maxLength: 255),
                         country = c.String(maxLength: 255),
@@ -42,8 +43,6 @@ namespace Falcon.Data.Migrations
                         LockoutEndDateUtc = c.DateTime(),
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
-                        Id = c.Int(nullable: false),
-                        UserName = c.String(),
                     })
                 .PrimaryKey(t => t.idMember)
                 .ForeignKey("dbo.BankAccount", t => t.bankaccount_fk)
@@ -68,11 +67,11 @@ namespace Falcon.Data.Migrations
                         UserId = c.Int(nullable: false),
                         ClaimType = c.String(),
                         ClaimValue = c.String(),
-                        Member_idMember = c.Int(),
+                        Member_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Member", t => t.Member_idMember)
-                .Index(t => t.Member_idMember);
+                .ForeignKey("dbo.Member", t => t.Member_Id)
+                .Index(t => t.Member_Id);
             
             CreateTable(
                 "dbo.Document",
@@ -267,11 +266,11 @@ namespace Falcon.Data.Migrations
                         UserId = c.Int(nullable: false),
                         LoginProvider = c.String(nullable: false, maxLength: 128),
                         ProviderKey = c.String(nullable: false, maxLength: 128),
-                        Member_idMember = c.Int(),
+                        Member_Id = c.Int(),
                     })
                 .PrimaryKey(t => new { t.UserId, t.LoginProvider, t.ProviderKey })
-                .ForeignKey("dbo.Member", t => t.Member_idMember)
-                .Index(t => t.Member_idMember);
+                .ForeignKey("dbo.Member", t => t.Member_Id)
+                .Index(t => t.Member_Id);
             
             CreateTable(
                 "dbo.CustomUserRoles",
@@ -279,13 +278,13 @@ namespace Falcon.Data.Migrations
                     {
                         UserId = c.Int(nullable: false),
                         RoleId = c.Int(nullable: false),
-                        Member_idMember = c.Int(),
+                        Member_Id = c.Int(),
                         CustomRole_Id = c.Int(),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.Member", t => t.Member_idMember)
+                .ForeignKey("dbo.Member", t => t.Member_Id)
                 .ForeignKey("dbo.CustomRoles", t => t.CustomRole_Id)
-                .Index(t => t.Member_idMember)
+                .Index(t => t.Member_Id)
                 .Index(t => t.CustomRole_Id);
             
             CreateTable(
@@ -416,8 +415,8 @@ namespace Falcon.Data.Migrations
         {
             DropForeignKey("dbo.CustomUserRoles", "CustomRole_Id", "dbo.CustomRoles");
             DropForeignKey("dbo.Admin", "idMember", "dbo.Member");
-            DropForeignKey("dbo.CustomUserRoles", "Member_idMember", "dbo.Member");
-            DropForeignKey("dbo.CustomUserLogins", "Member_idMember", "dbo.Member");
+            DropForeignKey("dbo.CustomUserRoles", "Member_Id", "dbo.Member");
+            DropForeignKey("dbo.CustomUserLogins", "Member_Id", "dbo.Member");
             DropForeignKey("dbo.Member", "profilepic_fk", "dbo.Document");
             DropForeignKey("dbo.Document", "attach_id", "dbo.Post");
             DropForeignKey("dbo.PrivateMessage", "sender_fk", "dbo.Freelancer");
@@ -454,7 +453,7 @@ namespace Falcon.Data.Migrations
             DropForeignKey("dbo.Circle_Freelancer", "Circle_idCircle", "dbo.Circle");
             DropForeignKey("dbo.Circle", "creator_fk", "dbo.Freelancer");
             DropForeignKey("dbo.CV", "document_idDocument", "dbo.Document");
-            DropForeignKey("dbo.CustomUserClaims", "Member_idMember", "dbo.Member");
+            DropForeignKey("dbo.CustomUserClaims", "Member_Id", "dbo.Member");
             DropForeignKey("dbo.Member", "bankaccount_fk", "dbo.BankAccount");
             DropIndex("dbo.Mission_Freelancer", new[] { "Mission_idMission" });
             DropIndex("dbo.Mission_Freelancer", new[] { "freelancers_idMember" });
@@ -473,8 +472,8 @@ namespace Falcon.Data.Migrations
             DropIndex("dbo.Circle_Freelancer", new[] { "freelancers_idMember" });
             DropIndex("dbo.Circle_Freelancer", new[] { "Circle_idCircle" });
             DropIndex("dbo.CustomUserRoles", new[] { "CustomRole_Id" });
-            DropIndex("dbo.CustomUserRoles", new[] { "Member_idMember" });
-            DropIndex("dbo.CustomUserLogins", new[] { "Member_idMember" });
+            DropIndex("dbo.CustomUserRoles", new[] { "Member_Id" });
+            DropIndex("dbo.CustomUserLogins", new[] { "Member_Id" });
             DropIndex("dbo.PrivateMessage", new[] { "sender_fk" });
             DropIndex("dbo.PrivateMessage", new[] { "receiver_fk" });
             DropIndex("dbo.Owner", new[] { "c_logo_fk" });
@@ -494,7 +493,7 @@ namespace Falcon.Data.Migrations
             DropIndex("dbo.Freelancer", new[] { "idMember" });
             DropIndex("dbo.CV", new[] { "document_idDocument" });
             DropIndex("dbo.Document", new[] { "attach_id" });
-            DropIndex("dbo.CustomUserClaims", new[] { "Member_idMember" });
+            DropIndex("dbo.CustomUserClaims", new[] { "Member_Id" });
             DropIndex("dbo.Member", new[] { "profilepic_fk" });
             DropIndex("dbo.Member", new[] { "bankaccount_fk" });
             DropIndex("dbo.Admin", new[] { "idMember" });

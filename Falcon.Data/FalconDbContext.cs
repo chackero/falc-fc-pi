@@ -1,4 +1,6 @@
+using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Falcon.Data.Mapping;
 using Falcon.Domain.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -38,6 +40,7 @@ namespace Falcon.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            
             modelBuilder.Configurations.Add(new AdminMap());
             modelBuilder.Configurations.Add(new BankAccountMap());
             modelBuilder.Configurations.Add(new CategoryMap());

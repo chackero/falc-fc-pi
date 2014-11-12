@@ -6,3 +6,20 @@
 .falcon-green {
     background-color: forestgreen;
 }
+.falcon-red {
+    color: red;
+}
+.enjoy-css-textfield {
+   display: block;
+  width: 300px;
+  padding: 10px 20px 10px 10px;
+  border: 1px solid #b7b7b7;
+  -webkit-border-radius: 6px;
+    -ms-border-radius: 6px;
+    border-radius: 6px;
+  font: normal 18px/normal "Trebuchet MS", Helvetica, sans-serif;
+  background: rgba(252,252,252,1);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
+}

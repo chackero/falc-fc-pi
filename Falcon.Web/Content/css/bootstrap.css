@@ -830,8 +830,8 @@ a.label:hover, a.badge:hover { color: rgb(255, 255, 255); text-decoration: none;
 .hero-unit { padding: 60px 0px; margin-bottom: 30px; }
 .hero-unit h1 { margin-bottom: 0px; font-size: 60px; line-height: 1; letter-spacing: -1px; color: inherit; }
 .hero-unit p { font-size: 18px; font-weight: 200; line-height: 27px; color: inherit; }
-.pull-right { float: right ! important; }
-.pull-left { float: left ! important; }
+.pull-right { float: right !important; }
+.pull-left { float: left !important; }
 .invisible { visibility: hidden; }
 .tabbable { clear: both; }
 .first { margin-left: 0 !important; }
