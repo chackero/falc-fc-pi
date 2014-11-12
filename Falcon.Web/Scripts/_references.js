@@ -157,3 +157,5 @@
 /// <reference path="../Content/js/modernizr.js" />
 /// <reference path="../Content/js/switcher.js" />
 /// <reference path="../content/js/jquery.steps.js" />
+/// <reference path="../content/v2/js/jquery-1.11.0.js" />
+/// <reference path="../content/v2/js/script.js" />

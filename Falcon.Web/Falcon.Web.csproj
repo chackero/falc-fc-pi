@@ -172,6 +172,7 @@
     <Compile Include="Controllers\FreelancerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -894,6 +895,40 @@
     <Content Include="Content\js\jquery.steps.js" />
     <Content Include="Content\js\modernizr.js" />
     <Content Include="Content\js\switcher.js" />
+    <Content Include="Content\v2\css\style.css" />
+    <Content Include="Content\v2\fonts\OpenSans-Bold.svg" />
+    <Content Include="Content\v2\fonts\OpenSans-ExtraBold.svg" />
+    <Content Include="Content\v2\fonts\OpenSans-Light.svg" />
+    <Content Include="Content\v2\fonts\OpenSans-Regular.svg" />
+    <Content Include="Content\v2\images\appstore-btn.png" />
+    <Content Include="Content\v2\images\avatar.png" />
+    <Content Include="Content\v2\images\company-logo.png" />
+    <Content Include="Content\v2\images\contacts-email.png" />
+    <Content Include="Content\v2\images\contacts-phone.png" />
+    <Content Include="Content\v2\images\dropdown.png" />
+    <Content Include="Content\v2\images\email.png" />
+    <Content Include="Content\v2\images\falcon_logo.png" />
+    <Content Include="Content\v2\images\featured-company.png" />
+    <Content Include="Content\v2\images\link.png" />
+    <Content Include="Content\v2\images\loadinfo.net.gif" />
+    <Content Include="Content\v2\images\logo.png" />
+    <Content Include="Content\v2\images\mail-bg.png" />
+    <Content Include="Content\v2\images\no-results.png" />
+    <Content Include="Content\v2\images\opening-header.jpg" />
+    <Content Include="Content\v2\images\opening-location.png" />
+    <Content Include="Content\v2\images\opening-logo.png" />
+    <Content Include="Content\v2\images\password.png" />
+    <Content Include="Content\v2\images\slide-phone.png" />
+    <Content Include="Content\v2\images\slide-search-results.png" />
+    <Content Include="Content\v2\images\slide1.jpg" />
+    <Content Include="Content\v2\images\slide2.jpg" />
+    <Content Include="Content\v2\images\slide3.jpg" />
+    <Content Include="Content\v2\images\sprites.png" />
+    <Content Include="Content\v2\images\user-avatar.png" />
+    <Content Include="Content\v2\images\video.html" />
+    <Content Include="Content\v2\immages\opening-header.html" />
+    <Content Include="Content\v2\js\jquery-1.11.0.js" />
+    <Content Include="Content\v2\js\script.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -949,6 +984,19 @@
     <Content Include="Content\assets\fonts\opensans-semibold.woff" />
     <Content Include="Content\assets\fonts\opensans.woff" />
     <Content Include="Content\assets\plugins\bootstrap-progressbar\bootstrap-progressbar.js.readme" />
+    <Content Include="Content\v2\fonts\OpenSans-Bold.ttf" />
+    <Content Include="Content\v2\fonts\OpenSans-Bold.woff" />
+    <Content Include="Content\v2\fonts\OpenSans-Boldd41d.eot" />
+    <Content Include="Content\v2\fonts\OpenSans-ExtraBold.ttf" />
+    <Content Include="Content\v2\fonts\OpenSans-ExtraBold.woff" />
+    <Content Include="Content\v2\fonts\OpenSans-ExtraBoldd41d.eot" />
+    <Content Include="Content\v2\fonts\OpenSans-Light.ttf" />
+    <Content Include="Content\v2\fonts\OpenSans-Light.woff" />
+    <Content Include="Content\v2\fonts\OpenSans-Lightd41d.eot" />
+    <Content Include="Content\v2\fonts\OpenSans-Regular.ttf" />
+    <Content Include="Content\v2\fonts\OpenSans-Regular.woff" />
+    <Content Include="Content\v2\fonts\OpenSans-Regulard41d.eot" />
+    <Content Include="Content\v2\images\Thumbs.db" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1008,6 +1056,8 @@
     <Content Include="Views\Mission\Details.cshtml" />
     <Content Include="Views\Shared\_FalconLoginPartial.cshtml" />
     <Content Include="Views\Freelancer\Create.cshtml" />
+    <Content Include="Views\Shared\_FalconLayout_v2.cshtml" />
+    <Content Include="Views\Owner\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
