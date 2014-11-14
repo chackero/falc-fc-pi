@@ -91,12 +91,12 @@ namespace Falcon.Data.Migrations
                 c => new
                     {
                         idCV = c.Int(nullable: false, identity: true),
-                        languages = c.String(maxLength: 255),
+                        languages = c.String(maxLength: 4000),
                         lastUpdate = c.DateTime(),
-                        personalStatement = c.String(maxLength: 255),
-                        skills = c.String(maxLength: 255),
-                        targetJobs = c.String(maxLength: 255),
-                        workExperience = c.String(maxLength: 255),
+                        personalStatement = c.String(maxLength: 4000),
+                        skills = c.String(maxLength: 4000),
+                        targetJobs = c.String(maxLength: 4000),
+                        workExperience = c.String(maxLength: 4000),
                         document_idDocument = c.Int(),
                     })
                 .PrimaryKey(t => t.idCV)

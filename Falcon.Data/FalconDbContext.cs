@@ -80,9 +80,16 @@ namespace Falcon.Data
     public class CustomUserStore : UserStore<Member, CustomRole, int,
         CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
+        static FalconDbContext falconDbContext = new FalconDbContext();
         public CustomUserStore(FalconDbContext context)
             : base(context)
         {
+        }
+
+        public CustomUserStore()
+            : base(falconDbContext)
+        {
+            
         }
     }
 

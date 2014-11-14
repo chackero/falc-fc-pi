@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -34,7 +35,8 @@ namespace Falcon.Data.Infrastructure
         }
         public virtual void Update(T entity)
         {
-            dbset.Attach(entity); dataContext.Entry(entity).State = EntityState.Modified;
+            //dataContext.Entry(entity).State = EntityState.Modified;
+            dbset.AddOrUpdate(entity);
         }
         public virtual void Delete(T entity)
         {

@@ -1,15 +1,21 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using Falcon.Domain.Models
 @model Falcon.Web.Models.FreelancerProfileViewModel
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
+    Freelancer random = ViewBag.random;
+    var path = "~/Content/v2/images/freelancer-logo.png";
+    if (random.Member.Document != null)
+    {
+        path = "ftp:/localhost/" + random.Member.Document.path;
+    }
 }
 
 
 <div class="main clearfix">
     <div class="content">
-        @using (Html.BeginForm("Create", "Freelancer", new { ViewBag.ReturnUrl }, FormMethod.Post))
+        @using (Html.BeginForm("Create", "Freelancer", new { ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
 
         <div class="post edit-company">
@@ -19,7 +25,10 @@
                 <!-- .post-header -->
                 <ul>
                     <li >
-                        
+                        <li class="settings-field">
+                        <p>Upload your profile picture</p>
+                            <input type="file" name="profilepic" id="profilepic" />
+                    </li>
                     </li>
                     <li class="settings-field">
                         @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { placeholder = "Firstname" } })
@@ -47,29 +56,19 @@
     <!-- .content -->
     <aside class="sidebar">
         <div class="widget">
-            <h3>What Can I Do?</h3>
+            <h3>Next Step?</h3>
             <p>After creating your profile you will add your CV so mission owners will be more interested in picking you.</p>
         </div>
         <!-- text widget -->
         <div class="widget company-widget">
-            <h3>My company profile</h3>
+            <h3>A Fellow Freelancer</h3>
             <div class="company-meta">
-                <img src="images/featured-company.png" alt="Company" />
-                <div class="count">21</div>
-                <p class="company-location">New York</p>
-                <a class="company-link" href="http://envato.com/">http://envato.com/</a>
-                <p class="description">Our company is constantly developing, we provide high-quality web and mobile applications and websites for companies from all over the world.</p>
-            </div>
-            <!-- .company-meta -->
-            <div class="contacts">
-                <ul class="phones">
-                    <li>+1 (555) 333 - 55 - 33</li>
-                    <li>+1 (000) 777 - 66 - 77</li>
-                </ul>
-                <ul class="emails">
-                    <li>cv@envato.com</li>
-                    <li>info@envato.com</li>
-                </ul>
+                <div style="text-align: center">
+                    <img src="@Url.Content(path)" alt="@random.Member.UserName" />
+                </div>
+                <div class="count">@random.Missions.Count</div>
+                <p class="company-location">@random.Member.city</p>
+                <p class="description">@random.Member.firstname</p>
             </div>
             <!-- .contacts -->
         </div>

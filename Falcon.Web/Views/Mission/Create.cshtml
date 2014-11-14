@@ -1,0 +1,88 @@
+﻿@using Falcon.Domain.Models
+@model Falcon.Web.Models.CreateMissionViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
+}
+
+
+<script type="text/javascript" src="~/Content/v2/datepicker/js/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/v2/datepicker/css/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/v2/datepicker/css/jquery-ui.structure.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/v2/datepicker/css/jquery-ui.theme.min.css" />
+
+<div class="content">
+    <div class="warning">
+        <p>
+            <span>Warning!</span><br />
+            Available only to registered companies !
+        </p>
+    </div>
+    <!-- .warning -->
+    @using (Html.BeginForm("Create", "Mission", new { ViewBag.ReturnUrl }, FormMethod.Post))
+    {
+
+        <div class="post add-opening">
+            <div class="post-header">
+                <h2>create a new mission</h2>
+            </div>
+            <!-- .post-header -->
+            <ul>
+                <li class="settings-field">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { placeholder = "title" } })
+
+                </li>
+                <!-- .settings-field -->
+                <li class="settings-field">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { placeholder = "description" } })
+                </li>
+                <!-- .settings-field -->
+                <li class="settings-field">
+                    <select>
+                        @{
+        foreach (Category c in ViewBag.Category)
+        {
+            <option>@c.name</option>
+        }
+                        }
+                    </select>
+                </li>
+                <li class="settings-field">
+                    @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { placeholder = "budget" } })
+                </li>
+                <!-- .settings-field -->
+                <!-- .settings-field -->
+                <li id="contacts" class="settings-field">
+                    @Html.TextBoxFor(model => model.plannedStart, new { placeholder = "plannedStart" })
+                </li>
+                <li id="contacts" class="settings-field">
+                    @Html.TextBoxFor(model => model.duration, new { placeholder = "Duration (1-2 weeks)" })
+                    @Html.TextBoxFor(model => model.deadline, new { placeholder = "deadline" })
+                </li>
+
+
+                <!-- .settings-field -->
+            </ul>
+
+            <!-- .post-footer -->
+        </div>
+        <input type="submit" value="save" />
+        <input type="reset" value="cancel" />
+        @*<p>   @Html.ActionLink("Details", "Details", new { id = Model.idMission})  </p>*@
+    }
+    <!-- search form -->
+</div>
+<!-- .content -->
+<script>
+    $(document).ready(function() {
+        $(".select-header#select-0").html("<p>Select Category</p>");
+        $("#@Html.IdFor(m=>m.plannedStart)").datepicker({ dateFormat: "dd-mm-yy" });
+        $("#@Html.IdFor(m=>m.deadline)").datepicker({ dateFormat: "dd-mm-yy" });
+        $("form").on("submit", function() {
+            var s = "<input type='hidden' value='" + $(".select-header#select-0").text() + "' name='category'/>";
+            $(this).append(s);
+        });
+    });
+    
+</script>

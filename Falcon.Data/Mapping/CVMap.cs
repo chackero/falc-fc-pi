@@ -12,19 +12,19 @@ namespace Falcon.Data.Mapping
 
             // Properties
             this.Property(t => t.languages)
-                .HasMaxLength(255);
+                .HasMaxLength(4000);
 
             this.Property(t => t.personalStatement)
-                .HasMaxLength(255);
+                .HasMaxLength(4000);
 
             this.Property(t => t.skills)
-                .HasMaxLength(255);
+                .HasMaxLength(4000);
 
             this.Property(t => t.targetJobs)
-                .HasMaxLength(255);
+                .HasMaxLength(4000);
 
             this.Property(t => t.workExperience)
-                .HasMaxLength(255);
+                .HasMaxLength(4000);
 
             // Table & Column Mappings
             this.ToTable("CV");

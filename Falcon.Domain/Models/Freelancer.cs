@@ -21,12 +21,12 @@ namespace Falcon.Domain.Models
         }
 
         public int idMember { get; set; }
+        public virtual Member Member { get; set; }
         public Nullable<int> curriculum_idCV { get; set; }
         public virtual ICollection<Circle> Circles { get; set; }
         public virtual ICollection<Complaint> Complaints { get; set; }
         public virtual CV CV { get; set; }
         public virtual ICollection<Event> Events { get; set; }
-        public virtual Member Member { get; set; }
         public virtual ICollection<Mission> Missions { get; set; }
         public virtual ICollection<PrivateMessage> PrivateMessages { get; set; }
         public virtual ICollection<PrivateMessage> PrivateMessages1 { get; set; }

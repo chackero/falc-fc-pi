@@ -4,79 +4,80 @@
 <!--[if IE 9]><html class = "ie9"><![endif]-->
 <!--[if !(IE 7) | !(IE 8) | !(IE 9) ]><!-->
 <html>
-<!--<![endif]-->
-<head>
-    <title>Opening - Job Board HTML Template</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="~/Content/v2/css/style.css" />
-    <script type="text/javascript" src="~/Content/v2/js/jquery-1.11.0.js"></script>
-    <script type="text/javascript" src="~/Content/v2/js/script.js"></script>
-    <!--[if IE]><script src="js/html5.js"></script><link rel="stylesheet" type="text/css" href="~/Content/v2/css/ie.css"><![endif]-->
-</head>
-<body>
-    <div class="wrapper version1">
-        <header>
-            <div class="site-header">
-                <div class="site-title">
-                    <a href="home_v.1.html"><img src="~/Content/v2/images/falcon_logo.png" alt="*" /></a>
+    <!--<![endif]-->
+    <head>
+        <title>Opening - Job Board HTML Template</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="~/Content/v2/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/v2/css/font-awesome.min.css" />
+        <script type="text/javascript" src="~/Content/v2/js/jquery-1.11.0.js"></script>
+        <script type="text/javascript" src="~/Content/v2/js/script.js"></script>
+        <!--[if IE]><script src="js/html5.js"></script><link rel="stylesheet" type="text/css" href="~/Content/v2/css/ie.css"><![endif]-->
+    </head>
+    <body>
+        <div class="wrapper version1">
+            <header>
+                <div class="site-header">
+                    <div class="site-title">
+                        <a href="home_v.1.html"><img src="~/Content/v2/images/falcon_logo.png" alt="*" /></a>
+                    </div>
+                    <!-- .site-title -->
+                    <nav class="site-nav">
+                        <ul>
+                            <li class="current_page_item">
+                                <a href="home_v.1.html">Home</a>
+                                <ul class="sub-menu">
+                                    <li class="current_page_item"><a href="home_v.1.html">Home 1</a></li>
+                                    <li><a href="home_v.2.html">Home 2</a></li>
+                                    <li><a href="home_v.3.html">Home 3</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Pages</a>
+                                <ul class="sub-menu">
+                                    <li><a href="opening.html">Opening</a></li>
+                                    <li><a href="add_opening.html">Add Opening</a></li>
+                                    <li><a href="company_profile.html">Company Profile</a></li>
+                                    <li><a href="company_profile_settings.html">Company Profile Settings</a></li>
+                                    <li><a href="search_results_left_aside.html">Search Results Left Aside</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- .site-nav -->
+                    <div class="user-area">
+                        @Html.Partial("_FalconLoginPartial")
+                        <!-- .user-options -->
+                    </div>
+                    <!-- .user-area -->
                 </div>
-                <!-- .site-title -->
-                <nav class="site-nav">
-                    <ul>
-                        <li class="current_page_item">
-                            <a href="home_v.1.html">Home</a>
-                            <ul class="sub-menu">
-                                <li class="current_page_item"><a href="home_v.1.html">Home 1</a></li>
-                                <li><a href="home_v.2.html">Home 2</a></li>
-                                <li><a href="home_v.3.html">Home 3</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Pages</a>
-                            <ul class="sub-menu">
-                                <li><a href="opening.html">Opening</a></li>
-                                <li><a href="add_opening.html">Add Opening</a></li>
-                                <li><a href="company_profile.html">Company Profile</a></li>
-                                <li><a href="company_profile_settings.html">Company Profile Settings</a></li>
-                                <li><a href="search_results_left_aside.html">Search Results Left Aside</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- .site-nav -->
-                <div class="user-area">
-                    @Html.Partial("_FalconLoginPartial")
-                    <!-- .user-options -->
-                </div>
-                <!-- .user-area -->
-            </div>
-            <!-- site-header -->
-        </header>
-        <!-- header -->
-        @RenderBody()
+                <!-- site-header -->
+            </header>
+            <!-- header -->
+            @RenderBody()
 
-        <footer>
-            <div class="site-footer">
-                <div class="site-title">
-                    <a href="home_v.1.html"><img src="images/logo.png" alt="*" /></a>
-                    <h1><a href="home_v.1.html">Opening</a></h1>
+            <footer>
+                <div class="site-footer">
+                    <div class="site-title">
+                        <a href="home_v.1.html"><img src="images/logo.png" alt="*" /></a>
+                        <h1><a href="home_v.1.html">Opening</a></h1>
+                    </div>
+                    <!-- .site-title -->
+                    <nav class="site-nav">
+                        <ul>
+                            <li><a href="http://bestwebsoft.com/about/">About</a></li>
+                            <li><a href="http://bestwebsoft.com/plugin/">Products</a></li>
+                            <li><a href="http://support.bestwebsoft.com/">Support Forum</a></li>
+                        </ul>
+                    </nav>
+                    <!-- .site-nav -->
+                    <div class="links"><a class="facebook" href="https://www.facebook.com/bestwebsoft"></a><a class="twitter" href="https://twitter.com/bestwebsoft"></a><a class="youtube" href="http://www.youtube.com/bestwebsoft"></a></div>
+                    <!-- .links -->
                 </div>
-                <!-- .site-title -->
-                <nav class="site-nav">
-                    <ul>
-                        <li><a href="http://bestwebsoft.com/about/">About</a></li>
-                        <li><a href="http://bestwebsoft.com/plugin/">Products</a></li>
-                        <li><a href="http://support.bestwebsoft.com/">Support Forum</a></li>
-                    </ul>
-                </nav>
-                <!-- .site-nav -->
-                <div class="links"><a class="facebook" href="https://www.facebook.com/bestwebsoft"></a><a class="twitter" href="https://twitter.com/bestwebsoft"></a><a class="youtube" href="http://www.youtube.com/bestwebsoft"></a></div>
-                <!-- .links -->
-            </div>
-            <!-- .site-footer -->
-        </footer>
-        <!-- footer -->
-    </div>
-    <!-- .wrapper -->
-</body>
+                <!-- .site-footer -->
+            </footer>
+            <!-- footer -->
+        </div>
+        <!-- .wrapper -->
+    </body>
 </html>

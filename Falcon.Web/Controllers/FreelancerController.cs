@@ -37,26 +37,61 @@ namespace Falcon.Web.Controllers
             return View(freelancer);
         }
 
+        [Authorize]
         // GET: Freelancer/Create
         public ActionResult Create()
         {
+            var c = falconService.GetFreelancerById(User.Identity.GetUserId<int>());
+            if (c != null)
+                return RedirectToAction("Create", "CV");
+            ViewBag.random = FalconUtils.GetRandomFreelancer();
             return View();
         }
 
         // POST: Freelancer/Create
         [HttpPost]
-        public ActionResult Create(FreelancerProfileViewModel model)
+        public ActionResult Create(FreelancerProfileViewModel model, HttpPostedFileBase profilepic)
         {
+            var random = FalconUtils.GetRandomFreelancer();
            if (!ModelState.IsValid)
             {
                 return View(model);
             }
             var freelancer = new Freelancer
             {
-                Member = UserManager.FindById(User.Identity.GetUserId<int>())
+                idMember = User.Identity.GetUserId<int>()
             };
+            Document doc = null;
+            if (profilepic != null)
+            {
+                const string temppath = @"D:\Temp\";
+                string filename = "profile_" + User.Identity.Name + ".png";
+                var path = temppath + filename;
+                if (System.IO.File.Exists(temppath + filename))
+                {
+                    System.IO.File.Delete(path);
+                }
+                profilepic.SaveAs(path);
+                FalconUtils.UploadToFtp("/Freelancers/Pics/", path);
+                doc = new Document
+                {
+                    path = "/Freelancers/Pics/" + filename,
+                    type = "profilepic"
+                };
+            }
+           
+            var current = UserManager.FindById(User.Identity.GetUserId<int>());
+            current.firstname = model.Firstname;
+            current.lastname = model.Lastname;
+            current.country = model.Address;
+            current.city = model.City;
+            current.role = "Freelancer";
+            current.Document = doc;
+            UserManager.AddToRole(User.Identity.GetUserId<int>(), "Freelancer");
+            UserManager.Update(current);
+            falconService.UnitOfWork.Commit();
             falconService.AddFreelancer(freelancer);
-            return RedirectToAction("Index");
+            return RedirectToAction("Create", "CV");
             
         }
 

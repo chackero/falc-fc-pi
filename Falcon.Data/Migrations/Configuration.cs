@@ -1,3 +1,6 @@
+using Falcon.Domain.Models;
+using Microsoft.AspNet.Identity;
+
 namespace Falcon.Data.Migrations
 {
     using System;
@@ -14,6 +17,25 @@ namespace Falcon.Data.Migrations
 
         protected override void Seed(Falcon.Data.FalconDbContext context)
         {
+            /*
+            context.Roles.AddOrUpdate(new CustomRole("Freelancer"));
+            context.Roles.AddOrUpdate(new CustomRole("Owner"));
+            context.Roles.AddOrUpdate(new CustomRole("Admin"));
+            var manager = new MembersManager(new CustomUserStore());
+            var member = new Member
+            {
+                UserName = "falconadmin"
+            };
+
+            manager.Create(member, "Falcon2Admin");
+            var admin = new Admin();
+            admin.idMember = manager.FindByName("falconadmin").Id;
+            context.Admins.Add(admin);
+             * 
+            var manager = new MembersManager(new CustomUserStore());
+            manager.AddToRole(manager.FindByName("falconadmin").Id, "Admin");
+            context.SaveChanges();
+             *
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
@@ -26,6 +48,7 @@ namespace Falcon.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+             */
         }
     }
 }

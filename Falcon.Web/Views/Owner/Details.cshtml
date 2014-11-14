@@ -1,20 +1,21 @@
-﻿@using Falcon.Domain.Models
-@model Falcon.Domain.Models.Freelancer
+﻿@using Microsoft.AspNet.Identity
+@model Falcon.Domain.Models.Owner
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
-    var picpath = Url.Content("~/Content/v2/images/freelancer-logo.png");
-    if (Model.Member.Document != null)
+    var picpath = Url.Content("~/Content/v2/images/company-logo.png");
+    if (Model.Document != null)
     {
-        picpath = "ftp://localhost" + Model.Member.Document.path;
+        picpath = "ftp://localhost" + Model.Document.path;
     }
 }
+
 <script>
     $(".wrapper").addClass("left-sidebar");
 </script>
 <div class="main clearfix">
-    <img class="opening-header" src="~/Content/v2/images/freelancer-header.jpg" alt="" />
+    <img class="opening-header" src="~/Content/v2/images/company-header.jpg" alt="" />
     <div class="content">
         <div class="post about">
             <div class="post-header">
@@ -22,40 +23,28 @@
                 @{
                     if (User.Identity.IsAuthenticated)
                     {
-                        if (@Model.Member.role.Equals("Freelancer"))
+                        if ((@Model.Member.role.Equals("Owner")) && (User.Identity.GetUserId<int>().Equals(Model.idMember)))
                         {
                             <a class="edit-link" href="@Url.Action("Edit")">[Edit]</a><a class="company-openings" href="">Show my missions</a>
                         }
                     }
                 }
-                
+
             </div>
             <!-- .post-header -->
             <table>
                 <tr>
                     <th><i class="fa fa-location-arrow"></i> Address</th>
-                    <td>@Model.Member.city - @Model.Member.country </td>
+                    <td>@Model.Member.city - @Model.Member.city </td>
                 </tr>
                 <tr>
-                    <th><i class="fa fa-area-chart"></i> Skills</th>
-                    <td>@Model.CV.skills</td>
+                    <th><i class="fa fa-file-text"></i> Description</th>
+                    <td>@Model.companyDescription</td>
                 </tr>
                 <tr>
-                    <th><i class="fa fa-suitcase"></i> Work Experiences</th>
+                    <th><i class="fa fa-suitcase"></i> Website</th>
                     <td>
-                        <p>@Model.CV.workExperience</p>
-                    </td>
-                </tr>
-                <tr>
-                    <th><i class="fa fa-check-circle"></i> Target</th>
-                    <td>
-                        <p>@Model.CV.targetJobs</p>
-                    </td>
-                </tr>
-                <tr>
-                    <th><i class="fa fa-language"></i> Languages</th>
-                    <td>
-                        <p>@Model.CV.languages</p>
+                        <p>@Model.Member.country</p>
                     </td>
                 </tr>
             </table>
@@ -63,20 +52,12 @@
         @{
             if (User.Identity.IsAuthenticated)
             {
-                if (@Model.Member.role.Equals("Freelancer"))
+                if (@Model.Member.role.Equals("Freelancer") || @Model.Member.role.Equals("Owner"))
                 {
 
                     <div class="post">
                         <div class="post-header">
-                            <p class="results">This Freelancer worked on <span>@Model.Missions.Count</span> missions until now</p>
-                            <label class="sort">
-                                Sort:
-                                <select>
-                                    <option>By date</option>
-                                    <option>By name</option>
-                                </select>
-                            </label>
-                            <!-- .sort -->
+                            <p class="results">@Model.Member.UserName has created <span>@Model.Missions.Count</span> missions.</p>
                         </div>
                         <!-- .post-header -->
                         <div class="table-wrapper">
@@ -90,13 +71,13 @@
                                         </td>
                                         <td class="opening-meta">
                                             <h2><a href="opening.html" class="opening-name">@mission.title</a></h2>
-                                            <h3><a href="company_profile.html" class="company">@mission.Owner.companyName</a></h3>
+                                            <h3><a href="company_profile.html" class="company">Budget : @mission.budget $</a></h3>
                                         </td>
                                         <td class="opening-type"><p class="freelance">@mission.status</p></td>
                                         <td class="opening-location"><p><a href="#">@mission.Category.name</a></p></td>
                                     </tr>
                                 }
-                                
+
                             </table>
                             <!-- .openings -->
                         </div>
@@ -108,14 +89,14 @@
     <!-- .content -->
     <aside class="sidebar">
         <div class="widget company-widget">
-            <h3>@Model.Member.firstname @Model.Member.lastname</h3>
+            <h3>@Model.companyName</h3>
             <div class="company-meta">
                 <div style="text-align: center">
                     <img style="max-width: 110px;" src="@picpath" alt="@Model.Member.UserName" />
                 </div>
                 <p class="company-location">@Model.Member.city</p>
-                <a class="company-link" href="mailto:@Model.Member.Email">@Model.Member.Email</a>
-                <p class="description" style="text-align:justify;text-justify: inter-ideograph">@Model.CV.personalStatement</p>
+                <a class="company-link" href="@Url.Encode(Model.Member.country)">@Model.Member.country</a>
+                <p class="description" style="text-align:justify;text-justify: inter-ideograph">@Model.companyDescription</p>
             </div>
             <!-- .company-meta -->
             <div class="contacts">
@@ -145,3 +126,4 @@
         $(".post .table-wrapper .openings").css("position", "inherit");
     });
 </script>
+

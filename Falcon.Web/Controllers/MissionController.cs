@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using Falcon.Domain.Models;
 using Falcon.Service;
+using Falcon.Web.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Falcon.Web.Controllers
 {
@@ -26,45 +31,70 @@ namespace Falcon.Web.Controllers
         // GET: Mission/Create
         public ActionResult Create()
         {
+            var m = falconService.GetCategories();
+
+            ViewBag.Category = m;
             return View();
         }
 
         // POST: Mission/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(FormCollection formCollection,CreateMissionViewModel model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                return Create(formCollection, model);
             }
-            catch
+            int cid = falconService.GetCategoryByName(formCollection["category"]).idCategory;
+            var mission = new Mission
             {
-                return View();
-            }
+                owner_fk = User.Identity.GetUserId<int>(),
+                title = model.Title,
+                budget = model.Budget,
+                description = model.Description,
+                plannedStart = model.plannedStart,
+                duration = model.duration,
+                postDate = DateTime.Now,
+                status = "active",
+                deadline = model.deadline,
+                category_idCategory = cid
+            };
+            falconService.AddMission(mission);
+            return RedirectToAction("Details",new {id=mission.idMission});
         }
 
         // GET: Mission/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Mission p = falconService.getMissionById(id);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
+            return View(p);
         }
 
         // POST: Mission/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Mission model,int id, FormCollection collection)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                int idc = falconService.GetCategoryByName(model.Category.name).idCategory;
+                model.category_idCategory = idc;
+                model.Category = falconService.GetCategoryById(idc);
+                model.idMission = id;
+                model.owner_fk = falconService.getMissionById(id).owner_fk;
+                model.status = falconService.getMissionById(id).status;
+                falconService.EditMission(model);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details",new {id=model.idMission});
             }
-            catch
-            {
-                return View();
-            }
+            return View(model);
         }
 
         // GET: Mission/Delete/5

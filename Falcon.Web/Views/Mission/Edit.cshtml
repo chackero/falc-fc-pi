@@ -1,0 +1,61 @@
+﻿@using Falcon.Domain.Models
+@model Falcon.Domain.Models.Mission
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
+}
+
+<div class="content">
+
+    <!-- .warning -->
+    @using (Html.BeginForm("Edit", "Mission", new { ViewBag.ReturnUrl }, FormMethod.Post))
+    {
+
+        <div class="post add-opening">
+            <div class="post-header">
+                <h2>create a new mission</h2>
+            </div>
+            <!-- .post-header -->
+            <ul>
+                <li class="settings-field">
+                    @Html.EditorFor(model => model.title, new { htmlAttributes = new { placeholder = "title" } })
+
+                </li>
+                <!-- .settings-field -->
+                <li class="settings-field">
+                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { placeholder = "description" } })
+                </li>
+                <!-- .settings-field -->
+                <li class="settings-field">
+                    @Html.EditorFor(model => model.Category.name, new { htmlAttributes = new { placeholder = "name category" } })
+                </li>
+                <li class="settings-field">
+                    @Html.EditorFor(model => model.budget, new { htmlAttributes = new { placeholder = "budget" } })
+                </li>
+                <!-- .settings-field -->
+                <!-- .settings-field -->
+                <li id="contacts" class="settings-field">
+                    @Html.EditorFor(model => model.postDate, new { htmlAttributes = new { placeholder = "postDate" } })
+                    @Html.EditorFor(model => model.plannedStart, new { htmlAttributes = new { placeholder = "plannedStart" } })
+                </li>
+                <li id="contacts" class="settings-field">
+                    @Html.EditorFor(model => model.duration, new { htmlAttributes = new { placeholder = "duration" } })
+                    @Html.EditorFor(model => model.deadline, new { htmlAttributes = new { placeholder = "deadline" } })
+                </li>
+
+
+                <!-- .settings-field -->
+            </ul>
+
+            <!-- .post-footer -->
+        </div>
+        <input type="submit" value="save" />
+        <input type="reset" value="cancel" />
+        @*<p>   @Html.ActionLink("Details", "Details", new { id = Model.idMission})  </p>*@
+    }
+    <!-- search form -->
+</div>
+
+
+

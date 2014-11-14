@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Falcon.Data;
 using Falcon.Domain.Models;
 using Falcon.Service;
+using Falcon.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -30,12 +34,18 @@ namespace Falcon.Web.Controllers
         // GET: Cv/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return RedirectToAction("Details","Freelancer",new {id});
         }
 
         // GET: Cv/Create
         public ActionResult Create()
         {
+            var c = falconService.GetFreelancerById(User.Identity.GetUserId<int>()).CV;
+            if (c != null)
+                return RedirectToAction("Details", "Freelancer",new {id=User.Identity.GetUserId<int>()});
+
+            ViewBag.user = UserManager.FindById(User.Identity.GetUserId<int>());
+            ViewBag.random = FalconUtils.GetRandomFreelancer();
             return View();
         }
 
@@ -43,19 +53,27 @@ namespace Falcon.Web.Controllers
         [HttpPost]
         public ActionResult Create(CV model, HttpPostedFileBase mypdf)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || mypdf.ContentLength == 0)
             {
                 return View(model);
             }
+
             var freelancer = falconService.GetFreelancerById(User.Identity.GetUserId<int>());
-            string savePath = "~/Content/Falcon/PDF";
-            string fileName = mypdf.FileName;
-            var doc = new Document
+            if (mypdf != null)
             {
-                path = mypdf.FileName
-            };
+                var filename = "cv_" + User.Identity.Name + ".pdf";
+                string path = @"D:\Temp\";
+                mypdf.SaveAs(path + filename);
+                FalconUtils.UploadToFtp("/Freelancers/Cvs/", path + filename);
+                var doc = new Document
+                {
+                    path = "/Freelancers/Cvs/" + filename,
+                    type = "pdf"
+                };
+                model.Document = doc;
+            }
             falconService.AddCv(freelancer,model);
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Freelancer", new { id = User.Identity.GetUserId<int>() });
         }
 
         // GET: Cv/Edit/5
@@ -101,5 +119,6 @@ namespace Falcon.Web.Controllers
                 return View();
             }
         }
+        
     }
 }

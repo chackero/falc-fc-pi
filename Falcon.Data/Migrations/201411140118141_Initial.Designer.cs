@@ -13,7 +13,7 @@ namespace Falcon.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201411120112367_Initial"; }
+            get { return "201411140118141_Initial"; }
         }
         
         string IMigrationMetadata.Source

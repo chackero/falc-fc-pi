@@ -106,9 +106,9 @@
     <Compile Include="Mapping\PostMap.cs" />
     <Compile Include="Mapping\PrivateMessageMap.cs" />
     <Compile Include="MembersManager.cs" />
-    <Compile Include="Migrations\201411120112367_Initial.cs" />
-    <Compile Include="Migrations\201411120112367_Initial.Designer.cs">
-      <DependentUpon>201411120112367_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201411140118141_Initial.cs" />
+    <Compile Include="Migrations\201411140118141_Initial.Designer.cs">
+      <DependentUpon>201411140118141_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,8 +142,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201411120112367_Initial.resx">
-      <DependentUpon>201411120112367_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201411140118141_Initial.resx">
+      <DependentUpon>201411140118141_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

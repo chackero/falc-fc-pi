@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using Falcon.Data.Infrastructure;
-using Falcon.Data.Migrations;
 using Falcon.Domain.Models;
 
 namespace Falcon.Service
@@ -11,7 +10,7 @@ namespace Falcon.Service
     {
         private IDatabaseFactory dbFactory;
         private IUnitOfWork unitOfWork;
-
+        public IUnitOfWork UnitOfWork { get { return unitOfWork; } }
         public FalconService()
         {
             dbFactory = new DatabaseFactory();
@@ -23,6 +22,7 @@ namespace Falcon.Service
         #region freelancers
         public void AddFreelancer(Freelancer freelancer)
         {
+
             unitOfWork.FreelancerRepository.Add(freelancer);
             //freelancer.role = "Freelancer";
             //unitOfWork.MemberRepository.Add(freelancer);
@@ -179,7 +179,10 @@ namespace Falcon.Service
             return unitOfWork.CategoryRepository.GetMany(p => p.name == name).ToList();
         }
 
-
+        public Category GetCategoryByName(string name)
+        {
+            return unitOfWork.CategoryRepository.Get(c => c.name.Equals(name));
+        }
 
         #endregion
 

@@ -1,4 +1,4 @@
-﻿@model Falcon.Domain.Models.Owner
+﻿@model Falcon.Web.Models.OwnerProfileViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -7,81 +7,55 @@
 
 <div class="main clearfix">
     <div class="content">
-        <form method="post" action="http://bestwebholding.com/demo_theme/opening-job-board-html-template/company_profile_settings.html">
+        @using (Html.BeginForm("Create", "Owner", new { ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
             <div class="post edit-company">
                 <div class="post-header">
-                    <h2>Edit details</h2>
-                    <a class="edit-link" href="company_profile_settings.html">[Edit]</a>
+                    <h2>Update your profile information</h2>
                 </div>
                 <!-- .post-header -->
                 <ul>
-                    <li class="settings-field">
-                        <img class="company-logo" src="~/Content/v2/images/company-logo.png" alt="" />
-                        <input name="company-name" required placeholder="Company name" type="text" />
-                        <input name="site" required type="text">
+                    <li>
                     </li>
-                    <!-- .settings-field -->
                     <li class="settings-field">
-                        <textarea name="description" required placeholder="Short description"></textarea>
+                        @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { placeholder = "Name of the company" } })
                     </li>
                     <!-- .settings-field -->
                     <li class="settings-field">
-                        <textarea name="details" rows="3" required placeholder="Details description"></textarea>
+                        @Html.EditorFor(model => model.CompanyDescription, new { htmlAttributes = new { placeholder = "Company description" } })
                     </li>
                     <!-- .settings-field -->
                     <li class="settings-field">
-                        <input name="employees" required placeholder="Number of employees" type="text" />
+                        @Html.EditorFor(model => model.Website, new { htmlAttributes = new { placeholder = "Website" } })
                     </li>
                     <!-- .settings-field -->
                     <li class="settings-field">
-                        <input name="video" type="file" />
-                        <input name="banner" type="file" />
+                        @Html.EditorFor(model => model.CompanyAddress, new { htmlAttributes = new { placeholder = "Company address" } })
                     </li>
-                    <!-- .settings-field -->
-                    <li id="contacts" class="settings-field">
-                        <input type="email" required placeholder="cv@envato.com" />
-                        <input type="text" required placeholder="+1 (555) 333 - 55 - 33" />
+                    <li class="settings-field">
+                        <p>Choose your company logo</p>
+                        <input type="file" name="complogo" id="complogo" />
                     </li>
-                    <!-- .settings-field -->
                 </ul>
             </div>
             <!-- .post edit-company -->
             <input type="submit" value="save" />
             <input type="reset" value="cancel" />
-        </form>
+        }
         <!-- form -->
     </div>
     <!-- .content -->
     <aside class="sidebar">
         <div class="widget">
-            <h3>Text widget</h3>
-            <p>Proin at risus augue. Proin sapien est, convallis vitae ligula vitae, fermentum viverra erat.</p>
+            <h3>Next Step?</h3>
+            <p>After filling the informations, you will be able to create missions and get the work done.</p>
         </div>
         <!-- text widget -->
-        <div class="widget company-widget">
-            <h3>My company profile</h3>
-            <div class="company-meta">
-                <img src="~/Content/v2/images/featured-company.png" alt="Company" />
-                <div class="count">21</div>
-                <p class="company-location">New York</p>
-                <a class="company-link" href="http://envato.com/">http://envato.com/</a>
-                <p class="description">Our company is constantly developing, we provide high-quality web and mobile applications and websites for companies from all over the world.</p>
-            </div>
-            <!-- .company-meta -->
-            <div class="contacts">
-                <ul class="phones">
-                    <li>+1 (555) 333 - 55 - 33</li>
-                    <li>+1 (000) 777 - 66 - 77</li>
-                </ul>
-                <ul class="emails">
-                    <li>cv@envato.com</li>
-                    <li>info@envato.com</li>
-                </ul>
-            </div>
-            <!-- .contacts -->
+        <div class="widget">
+            <h3>Tip</h3>
+            <p>Fill the informations correctly to avoid later problems.</p>
         </div>
-        <!-- .company-widget -->
     </aside>
     <!-- .sidebar -->
 </div>
-<!-- .main -->

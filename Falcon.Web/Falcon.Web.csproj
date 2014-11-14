@@ -178,6 +178,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FalconUtils.cs" />
     <Compile Include="Models\FalconViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -896,13 +897,24 @@
     <Content Include="Content\js\jquery.steps.js" />
     <Content Include="Content\js\modernizr.js" />
     <Content Include="Content\js\switcher.js" />
+    <Content Include="Content\v2\css\font-awesome.css" />
+    <Content Include="Content\v2\css\font-awesome.min.css" />
     <Content Include="Content\v2\css\style.css" />
+    <Content Include="Content\v2\datepicker\css\datepicker.css" />
+    <Content Include="Content\v2\datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="Content\v2\datepicker\css\jquery-ui.css" />
+    <Content Include="Content\v2\datepicker\css\jquery-ui.min.css" />
+    <Content Include="Content\v2\datepicker\css\jquery-ui.structure.min.css" />
+    <Content Include="Content\v2\datepicker\css\jquery-ui.theme.min.css" />
+    <Content Include="Content\v2\datepicker\js\jquery-ui.js" />
+    <Content Include="Content\v2\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\v2\fonts\OpenSans-Bold.svg" />
     <Content Include="Content\v2\fonts\OpenSans-ExtraBold.svg" />
     <Content Include="Content\v2\fonts\OpenSans-Light.svg" />
     <Content Include="Content\v2\fonts\OpenSans-Regular.svg" />
     <Content Include="Content\v2\images\appstore-btn.png" />
     <Content Include="Content\v2\images\avatar.png" />
+    <Content Include="Content\v2\images\company-header.jpg" />
     <Content Include="Content\v2\images\company-logo.png" />
     <Content Include="Content\v2\images\contacts-email.png" />
     <Content Include="Content\v2\images\contacts-phone.png" />
@@ -910,6 +922,8 @@
     <Content Include="Content\v2\images\email.png" />
     <Content Include="Content\v2\images\falcon_logo.png" />
     <Content Include="Content\v2\images\featured-company.png" />
+    <Content Include="Content\v2\images\freelancer-header.jpg" />
+    <Content Include="Content\v2\images\freelancer-logo.png" />
     <Content Include="Content\v2\images\link.png" />
     <Content Include="Content\v2\images\loadinfo.net.gif" />
     <Content Include="Content\v2\images\login.png" />
@@ -999,7 +1013,10 @@
     <Content Include="Content\v2\fonts\OpenSans-Regular.ttf" />
     <Content Include="Content\v2\fonts\OpenSans-Regular.woff" />
     <Content Include="Content\v2\fonts\OpenSans-Regulard41d.eot" />
-    <Content Include="Content\v2\images\Thumbs.db" />
+    <Content Include="Content\v2\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\v2\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\v2\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\v2\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1062,6 +1079,9 @@
     <Content Include="Views\Shared\_FalconLayout_v2.cshtml" />
     <Content Include="Views\Owner\Create.cshtml" />
     <Content Include="Views\Cv\Create.cshtml" />
+    <Content Include="Views\Owner\Details.cshtml" />
+    <Content Include="Views\Mission\Create.cshtml" />
+    <Content Include="Views\Mission\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
