@@ -135,10 +135,16 @@ namespace Falcon.Web.Controllers
                         type = "profilepic"
                     };
                 }
+                else
+                {
+                    doc = member.Document;
+                    doc.path = "/Freelancers/Pics/" + filename;
+                }
             }
 
             member.firstname = collection["firstname"];
             member.lastname = collection["lastname"];
+            member.Document = doc;
             UserManager.Update(member);
             falconService.UnitOfWork.Commit();
             falconService.EditFreelancer(freelancer);

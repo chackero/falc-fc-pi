@@ -72,11 +72,14 @@
         
         @switch (condition)
         {
+            case 1:
+                <a href="@Url.Action("Edit","Mission",new{id=Model.idMission})"><button data-enabled="false" class="submit-request">Edit</button></a>
+                break;
             case 2:
                 <button class="submit-request" disabled="disabled" >Already Applied</button>
                 break;
             case 3:
-                <button class="submit-request" >Submit request</button>
+            <button class="submit-request" data-enabled="true">Submit request</button>
                 break;
         } 
         
@@ -92,11 +95,14 @@
             
             @switch (condition)
             {
+                case 1:
+                    <a href="@Url.Action("Edit","Mission",new{id=Model.idMission})"><button data-enabled="false" class="submit-request">Edit</button></a>
+                    break;
                 case 2:
                     <button class="submit-request" disabled="disabled">Already Applied</button>
                     break;
                 case 3:
-                    <button class="submit-request" id="apply">Submit request</button>
+                <button class="submit-request" data-enabled="true" id="apply">Submit request</button>
                     <p>and wait for the confirmation.</p>
                     break;
             }
@@ -157,6 +163,8 @@
 <script src="~/Content/js/jquery-1.9.1.js"></script>
 <script>
     $(".submit-request").on("click", function () {
+        if ($(this).attr('data-enabled') === "false")
+            return false;
         $.ajax({
             type: "POST",
             url: '@Url.Action("ApplyForMission")',
@@ -167,7 +175,6 @@
                 });
     });
     function addmessage() {
-        alert("submitted");
         $(".submit-request").text("Submitted");
     }
 </script>

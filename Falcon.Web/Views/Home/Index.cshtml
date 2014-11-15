@@ -1,502 +1,224 @@
-﻿@{
+﻿@using Falcon.Domain.Models
+@model IEnumerable<Falcon.Domain.Models.Freelancer>
+@{
     ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_FalconLayout.cshtml";
+    Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
+    List<Category> categories = ViewBag.categories;
+    List<Mission> missions = ViewBag.missions;
+    List<Owner> owners = ViewBag.owners;
+    var path = "ftp://falcon:falcon@localhost/";
 }
-
-
-<!-- Banner Area -->
-<section class="header-banner">
-    <div class="inner">
-        <!-- Panel 3 -->
-        <div id="login-panel">
-            <div class="left">
-                <div class="first">
-                    <div class="counter">
-                        <ul id="counter">
-                            <li class="unvis">0</li>
-                            <li>7</li>
-                            <li class="border"></li>
-                            <li>9</li>
-                            <li>4</li>
-                            <li>5</li>
-                        </ul>
-                        <div class="counter-label">Missions</div>
-                    </div>
-                    <div id="find-job-buttom"><a>Register Now</a></div>
-                </div>
-                <div class="second">
-                    <div class="form">
-                        <form id="login-1" action="index.html">
-                            <input type="text" placeholder="Email" class="textfield" />
-                            <input type="text" placeholder="Username" class="textfield" />
-                            <input type="password" placeholder="Password" class="textfield" />
-                            <input type="submit" value="Register" id="login-submit-1" />
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="right">
-                <div class="first">
-                    <div class="badge"></div>
-                    <div id="post-job-buttom"><a>Login</a></div>
-                </div>
-                <div class="second">
-                    <div class="form">
-                        <form id="login-2" action="index.html">
-                            <input type="text" placeholder="Username" class="textfield" />
-                            <input type="password" placeholder="Password" class="textfield" />
-                            <input type="submit" value="Sign In" class="glyphicon-search" id="login-submit-2" />
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Panel 3 -->
+<script>
+    $(".wrapper").addClass("with-slider version2");
+</script>
+<div class="slider">
+    <div class="slide slide-1">
+        <img class="slide-img" src="~/Content/v2/images/slide1.jpg" alt="" />
+        <h2>Need Work?</h2>
+        <p>Register and get free access to latest missions worldwide. Create and submit your CV using few simple steps.</p>
+        <a href="@Url.Action("Register", "Account")" class="learn-more">&lt; Learn more &gt;</a>
     </div>
-</section>
-<!-- /Banner Area -->
+    <div class="slide slide-2">
+        <img class="slide-img" src="~/Content/v2/images/slide2.jpg" alt="" />
+        <h2>Instant access to latest missions</h2>
+        <p>Search for missions by categoy or budget!</p>
+        <img class="slider-search-results" src="~/Content/v2/images/slide-search-results.png" alt="" />
+    </div>
+    <div class="slide slide-3">
+        <img class="slide-img" src="~/Content/v2/images/slide3.jpg" alt="" />
+        <h2>You want to create missions?</h2>
+        <p>Nothing is simplier just register and start getting work done</p>
+    </div>
+</div>
+<!-- .slider -->
+<div class="main clearfix">
+    <div class="search-wrapper">
+        <form class="opening-search" method="post" action="@Url.Action("SearchBYCategoryAndCity", "Mission")">
+            <div class="search-top clearfix">
+                <div class="center">
+                    <div class="search-field">
+                        <label>
+                            Minimum Budget<br />
+                            <input name="keyword" id="keyword" type="text" placeholder="City" />
+                        </label>
+                    </div>
+                    <div class="search-field">
+                        <label>
+                            Category<br />
+                            <input readonly="true" class="with-dropdown" name="category" id="category" type="text" placeholder="Category" />
+                        </label>
+                        <ul id="dropdown-category" class="dropdown">
 
-<div class="clear"></div>
-<div class="inner">
-    <!-- Content Inner -->
-    <div class="content-inner">
+                            @{
+                                foreach (Category categ in categories)
+                                {
+                                    <li class="checked">
+                                        <!-- <input  name="categories" type="radio" name="categorie" value="@categ.name" />
+                                            -->
+                                        <div class="mm" name="categoryName">@categ.name</div>
 
-        <!-- Content Center -->
-        <div class="content-center frontpage">
-            <div class="heading-l">
-                <h2> Find A Mission Per </h2>
-            </div>
-            <div id="explore" class="non-title-border">
-                <div class="block-content">
-                    <ul class="tabs">
-                        <li class="first"><a href="#industry">Category</a></li>
-                        <li><a href="#type">Budget</a></li>
-                        <li class="last"><a href="#country">Country</a></li>
-                    </ul>
-                    <div id="industry" class="box-1">
-                        <div class="scroll-container">
-                            <div class="left">
-                                <h4>Administrative and Support Services</h4>
-                                <ul>
-                                    <li><a href="#">Support Services<span>(34)</span></a></li>
-                                    <li><a href="#">Consulting Services<span>(142)</span></a></li>
-                                    <li><a href="#">Customer Service<span>(67)</span></a></li>
-                                    <li>
-                                        <a href="#">
-                                            Employment Placement<br />
-                                            Agencies/Recruiting<span>(24)</span>
-                                        </a>
                                     </li>
-                                    <li><a href="#">Human Resources<span>(113)</span></a></li>
-                                    <li><a href="#">Legal<span>(27)</span></a></li>
-                                    <li><a href="#">Administration<span>(57)</span></a></li>
-                                    <li><a href="#">Contracts/Purchasing<span>(29)</span></a></li>
-                                    <li><a href="#">Secretarial<span>(22)</span></a></li>
-                                    <li><a href="#">Security<span>(26)</span></a></li>
-                                    <li><a href="#">Telemarketing<span>(4)</span></a></li>
-                                    <li><a href="#">Translation<span>(12)</span></a></li>
-                                    <li><a href="#">Management<span>(70)</span></a></li>
-                                    <li><a href="#">Business Support <span>(29)</span></a></li>
-                                </ul>
-                            </div>
-                            <div class="right">
-                                <h4>Manufacturing and Industrial</h4>
-                                <ul>
-                                    <li><a href="#">Agriculture/Forestry/Fishing<span>(42)</span></a></li>
-                                    <li><a href="#">Installation, Maintenance<span>(37)</span></a></li>
-                                    <li><a href="#">Manufacturing and Production<span>(96)</span></a></li>
-                                    <li><a href="#">Mining<span>(9)</span></a></li>
-                                    <li><a href="#">Safety/Environment<span>(21)</span></a></li>
-                                    <li><a href="#">Industrial<span>(184)</span></a></li>
-                                    <li><a href="#">Manufacturing<span>(149)</span></a></li>
-                                    <li><a href="#">Mechanical<span>(28)</span></a></li>
-                                    <li><a href="#">Technical/Maintenance<span>(40)</span></a></li>
-                                    <li><a href="#">Lubricants/Greases Blending<span>(10)</span></a></li>
-                                    <li><a href="#">Textiles<span>(10)</span></a></li>
-                                    <li><a href="#">Aerospace and Defense<span>(14)</span></a></li>
-                                </ul>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="external-scroll_y">
-                            <div class="scroll-element_outer">
-                                <div class="scroll-element_size"></div>
-                                <div class="scroll-element_inner"></div>
-                                <div class="scroll-bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="type" class="box-1">
-                        <div class="scroll-container">
-                            <div class="info">
-                                <p>In this section you can search for mission with a certain budget.</p>
-                            </div>
-                            <div class="left">
-                                <h4>Select mission budget range</h4>
-                                <form>
-                                    <input type="number" placeholder="Min" name="budgetMin" />
-                                    <input type="number" placeholder="Max" name="budgetMax" />
-                                    <input type="submit" value="Search" class="btn-success" />
-                                </form>
-                            </div>
-                            <div class="right">
-                                <h4>Or you can list missions by budget</h4>
-                                <a class="btn-lg">List</a>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="external-scroll_y">
-                            <div class="scroll-element_outer">
-                                <div class="scroll-element_size"></div>
-                                <div class="scroll-element_inner"></div>
-                                <div class="scroll-bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="country" class="box-1">
-                        <div class="scroll-container">
-                            <div class="left">
-                                <ul>
-                                    <li><a href="#"><img src="content/flag-icons/Afghanistan.png" alt="Flag" height="24" width="24" />Afghanistan<span>(7)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/African%20Union.png" alt="Flag" height="24" width="24" />African Union<span>(6)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Aland.png" alt="Flag" height="24" width="24" />Aland<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Albania.png" alt="Flag" height="24" width="24" />Albania<span>(7)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Alderney.png" alt="Flag" height="24" width="24" />Alderney<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Algeria.png" alt="Flag" height="24" width="24" />Algeria<span>(4)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/American%20Samoa.png" alt="Flag" height="24" width="24" />American Samoa<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Andorra.png" height="24" alt="Flag" width="24" />Andorra<span>(5)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Angola.png" alt="Flag" height="24" width="24" />Angola<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Anguilla.png" alt="Flag" height="24" width="24" />Anguilla<span>(8)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Antarctica.png" alt="Flag" height="24" width="24" />Antarctica<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Antigua%20Barbuda.png" alt="Flag" height="24" width="24" />Antigua &amp; Barbuda<span>(6)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Arab%20League.png" alt="Flag" height="24" width="24" />Arab League<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Argentina.png" alt="Flag" height="24" width="24" />Argentina<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Armenia.png" alt="Flag" height="24" width="24" />Armenia<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Aruba.png" alt="Flag" height="24" width="24" />Aruba<span>(8)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/ASEAN.png" alt="Flag" height="24" width="24" />ASEAN<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Afghanistan.png" alt="Flag" height="24" width="24" />Afghanistan<span>(7)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/African%20Union.png" alt="Flag" height="24" width="24" />African Union<span>(6)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Aland.png" alt="Flag" height="24" width="24" />Aland<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Albania.png" alt="Flag" height="24" width="24" />Albania<span>(7)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Alderney.png" alt="Flag" height="24" width="24" />Alderney<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Algeria.png" alt="Flag" height="24" width="24" />Algeria<span>(4)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/American%20Samoa.png" alt="Flag" height="24" width="24" />American Samoa<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Andorra.png" alt="Flag" height="24" width="24" />Andorra<span>(5)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Angola.png" alt="Flag" height="24" width="24" />Angola<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Anguilla.png" alt="Flag" height="24" width="24" />Anguilla<span>(8)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Antarctica.png" alt="Flag" height="24" width="24" />Antarctica<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Antigua%20Barbuda.png" alt="Flag" height="24" width="24" />Antigua &amp; Barbuda<span>(6)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Arab%20League.png" alt="Flag" height="24" width="24" />Arab League<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Argentina.png" alt="Flag" height="24" width="24" />Argentina<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Armenia.png" alt="Flag" height="24" width="24" />Armenia<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Aruba.png" alt="Flag" height="24" width="24" />Aruba<span>(8)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/ASEAN.png" alt="Flag" height="24" width="24" />ASEAN<span>(3)</span></a></li>
-                                </ul>
-                            </div>
-                            <div class="right">
-                                <ul>
-                                    <li><a href="#"><img src="content/flag-icons/Kenya.png" alt="Flag" height="24" width="24" />Kenya<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Kiribati.png" alt="Flag" height="24" width="24" />Kiribati<span>(4)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Kosovo.png" alt="Flag" height="24" width="24" />Kosovo<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Kuwait.png" alt="Flag" height="24" width="24" />Kuwait<span>(6)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Kyrgyzstan.png" alt="Flag" height="24" width="24" />Kyrgyzstan<span>(1)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Laos.png" alt="Flag" height="24" width="24" />Laos<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Latvia.png" alt="Flag" height="24" width="24" />Latvia<span>(4)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Lebanon.png" alt="Flag" height="24" width="24" />Lebanon<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Lesotho.png" alt="Flag" height="24" width="24" />Lesotho<span>(5)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Liberia.png" alt="Flag" height="24" width="24" />Liberia<span>(7)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Libya.png" alt="Flag" height="24" width="24" />Libya<span>(1)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Liechtenstein.png" alt="Flag" height="24" width="24" />Liechtenstein<span>(6)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Lithuania.png" alt="Flag" height="24" width="24" />Lithuania<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Luxembourg.png" alt="Flag" height="24" width="24" />Luxembourg<span>(8)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Macao.png" alt="Flag" height="24" width="24" />Macao<span>(5)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Macedonia.png" alt="Flag" height="24" width="24" />Macedonia<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Madagascar.png" alt="Flag" height="24" width="24" />Madagascar<span>(1)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Kenya.png" alt="Flag" height="24" width="24" />Kenya<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Kiribati.png" alt="Flag" height="24" width="24" />Kiribati<span>(4)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Kosovo.png" alt="Flag" height="24" width="24" />Kosovo<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Kuwait.png" alt="Flag" height="24" width="24" />Kuwait<span>(6)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Kyrgyzstan.png" alt="Flag" height="24" width="24" />Kyrgyzstan<span>(1)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Laos.png" alt="Flag" height="24" width="24" />Laos<span>(3)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Latvia.png" alt="Flag" height="24" width="24" />Latvia<span>(4)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Lebanon.png" alt="Flag" height="24" width="24" />Lebanon<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Lesotho.png" alt="Flag" height="24" width="24" />Lesotho<span>(5)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Liberia.png" alt="Flag" height="24" width="24" />Liberia<span>(7)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Libya.png" alt="Flag" height="24" width="24" />Libya<span>(1)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Liechtenstein.png" alt="Flag" height="24" width="24" />Liechtenstein<span>(6)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Lithuania.png" alt="Flag" height="24" width="24" />Lithuania<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Luxembourg.png" alt="Flag" height="24" width="24" />Luxembourg<span>(8)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Macao.png" alt="Flag" height="24" width="24" />Macao<span>(5)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Macedonia.png" alt="Flag" height="24" width="24" />Macedonia<span>(2)</span></a></li>
-                                    <li><a href="#"><img src="content/flag-icons/Madagascar.png" alt="Flag" height="24" width="24" />Madagascar<span>(1)</span></a></li>
-                                </ul>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="external-scroll_y">
-                            <div class="scroll-element_outer">
-                                <div class="scroll-element_size"></div>
-                                <div class="scroll-element_inner"></div>
-                                <div class="scroll-bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clear"></div>
-            <!--Latest Jobs Block-->
-            <div id="latest-job">
-                <div class="heading-l">
-                    <h2> Latest Missions </h2>
-                </div>
-                <div class="latest-job-wrapper">
-                    <div class="block-content dott-flexslider box-1">
-                        <ul class="slides">
-                            <li>
-                                <div class="company-logo">
-                                    <a href="#"><img src="~/Content/images/job-thumb.jpg" alt="" /></a>
-                                    <div class="nav-buttons">
-                                        <ul>
-                                            <li class="link"><a href="job.html"><i class="fa fa-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="company-text">
-                                    <div class="title">
-                                        <a href="#">Front-End Developer at Envato</a>
-                                        <div class="location">Sydney, Australia</div>
-                                    </div>
-                                    <div class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. <a>Read More</a></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="company-logo">
-                                    <a href="#"><img src="~/Content/images/job-thumb.jpg" alt="" /></a>
-                                    <div class="nav-buttons">
-                                        <ul>
-                                            <li class="link"><a href="job.html"><i class="fa fa-link"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="company-text">
-                                    <div class="title">
-                                        <a href="#">Front-End Developer at Envato</a>
-                                        <div class="location">Sydney, Australia</div>
-                                    </div>
-                                    <div class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. <a>Read More</a></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!--/Latest Jobs Block-->
-            <div class="clear"></div>
-            <!--Partners Block-->
-            <div id="partners">
-                <div class="heading-l">
-                    <h2> Our Partners </h2>
-                </div>
-                <div class="block-content box-1">
-                    <section class="row-fluid">
-                        <ul class="partner-list span4">
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                        </ul>
-                        <ul class="partner-list span4">
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                        </ul>
-                        <ul class="partner-list span4">
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                            <li><a href="#"><img src="~/Content/images/client-logo.png" alt="" /></a></li>
-                        </ul>
-                    </section>
-                </div>
-            </div>
-            <!--Partners Block-->
-            <div class="clear"></div>
+                                }
 
-        </div>
-        <!-- /Content Center -->
-        <!-- Content Right -->
-        <div class="content-right">
-            <div id="social-like" class="block background">
-                <h2 class="title-1">Share Us With Your Friends</h2>
-                <div class="block-content">
-                    <div class="social-like linkedin"><a class="like-button" href="#">LinkedIn</a><span class="count">500</span></div>
-                    <div class="social-like motibu"><a class="like-button" href="#">Motibu</a><span class="count">2.7K</span></div>
-                    <div class="social-like facebook"><a class="like-button" href="#">Facebook</a><span class="count">1.3K</span></div>
-                    <div class="social-like twitter"><a class="like-button" href="#">Twitter</a><span class="count">868</span></div>
-                </div>
-            </div>
-            <div id="advertising" class="block border">
-                <div class="block-content">
-                    <img src="~/Content/images/sb-ad.jpg" alt="sidebarad" />
-                    <!-- <div class="advertising-test">300x250<br/>
-                      Ad Banner</div>-->
-                </div>
-            </div>
-            <div id="poll" class="block background">
-                <h2 class="title-1">5 Tips to pass your interview!</h2>
-                <!--<iframe width="260" height="150" src="http://www.youtube.com/embed/wqGfDdJDONI?wmode=transparent" frameborder="0" allowfullscreen></iframe>-->
-                <div class="ad-wrapper"> <img src="~/Content/images/sb-video.jpg" alt="sb-video" /> </div>
-                <h2 class="title-1">How do you find our website</h2>
-                <div class="block-content">
-                    <form id="poll-form" action="index.html">
-                        <ul id="radio-checkbox-list">
-                            <li>
-                                <input id="poll_choice_1" type="radio" name="poll-choice" value="1" />
-                                <label for="poll_choice_1">Perfect</label>
-                            </li>
-                            <li>
-                                <input id="poll_choice_2" type="radio" name="poll-choice" value="2" />
-                                <label for="poll_choice_2">Great</label>
-                            </li>
-                            <li>
-                                <input id="poll_choice_3" type="radio" name="poll-choice" value="3" />
-                                <label for="poll_choice_3">Good</label>
-                            </li>
-                            <li>
-                                <input id="poll_choice_4" type="radio" name="poll-choice" value="4" />
-                                <label for="poll_choice_4">Fair</label>
-                            </li>
-                            <li>
-                                <input id="poll_choice_5" type="radio" name="poll-choice" value="5" />
-                                <label for="poll_choice_5">Bad</label>
-                            </li>
+                            }
                         </ul>
-                        <button class="btn blue">Vote Now</button>
-                    </form>
+                        <!-- #category -->
+                    </div>
+                    <button class="search-button" type="submit"></button>
                 </div>
+                <!-- .center -->
+            </div>
+            <!-- .search-top -->
+            <div class="search-bottom">
+                <div class="center">
+                    <label class="full-time">
+                        <input class="dark" name="full-time" type="checkbox" />
+                        Full-time
+                    </label>
+                    <label class="contract">
+                        <input class="dark" name="contract" type="checkbox" />
+                        Contract
+                    </label>
+                    <label class="freelance">
+                        <input class="dark" checked name="freelance" type="checkbox" />
+                        Freelance
+                    </label>
+                </div>
+                <!-- .ceneter -->
+            </div>
+            <!-- .search-bottom -->
+        </form>
+    </div>
+    <script src="~/Content/js/jquery-1.9.1.js"></script>
+    <script>
+        //$(document).ready(function () {
+        //    var all = $("#dropdown-category").find("li");
+        //    $("#dropdown-category").find("li").each(function () {
+
+        //        $(this).bind("click", function () {
+
+        //            $(all).each(function() {
+        //                $(this).removeClass('checked');
+        //            });
+        //            $(this).addClass("checked");
+        //            var current = $(this).next().find("input").first();
+        //            var name = $(this).text().trim();
+        //            $("#dropdown-category").find("input").each(function() {
+        //                if ($(this) != $(current)) {
+        //                    $(this).removeAttr('checked');
+        //                }
+        //            });
+        //            $(current).attr('checked', 'checked');
+        //            $("#category").attr('placeholder', name);
+
+        //        });
+        //    });
+        //});
+
+        $(document).ready(function () {
+            $(".checked").click(function () {
+                $("#category").val($(this).find(".mm").html());
+                $("#category").attr("value", $(this).find(".mm").html());
+                $("#dropdown-category").hide();
+            });
+        });
+    </script>
+    <div class="content">
+
+        <div class="post">
+            <div class="post-header">
+                <p class="results"><span>Latest Missions</span> </p>
+            </div>
+            <!-- .post_header -->
+            <div class="table-wrapper">
+                <table class="openings">
+                    @{
+                        foreach (Mission m in @missions)
+                        {
+                            <tr class="opening">
+                                <td class="opening-logo">
+                                    <div class="star"></div>
+                                    <a href="#"><img src="@path@m.Owner.Document.path" alt="Logo" width="97" height="97" /></a>
+                                </td>
+                                <td class="opening-meta">
+                                    <h2><a href="@Url.Action("Details","Mission",new{id=@m.idMission})" class=" opening-name">@m.title.ToUpperInvariant()</a></h2>
+                                    <h3><a href="company_profile.html" class="company">@m.Owner.companyName.ToUpperInvariant()</a></h3>
+                                </td>
+                                <td class="opening-type"><p class="freelance">@m.budget$</p></td>
+                                <td class="opening-location"><p><a href="#">@m.deadline</a></p></td>
+                            </tr>
+
+                        }
+
+
+                    }
+                </table>
+                <!-- .openings -->
             </div>
         </div>
-        <!-- /Content Right -->
+        <div class="post">
+            <div class="post-header">
+                <p class="results"><span>Freelancers</span></p>
+            </div>
+            <div class="table-wrapper">
+                <table class="openings">
+                    @{
+                        foreach (Freelancer freelancer in Model)
+                        {
+                            <tr class="opening">
+                                <td class="opening-logo">
+                                    <div class="star"></div>
+                                    @if (freelancer.Member.Document != null)
+                                    {
+                                        <a href="#"><img src="@path@freelancer.Member.Document.path" alt="Logo" width="97" height="97" /></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#"><img src="~/Content/v2/images/freelancer-logo.png" alt="Logo" width="97" height="97" /></a>
+                                    }
 
-        <div class="clear"></div>
-        <!-- Clear Line -->
+                                </td>
+                                <td class="opening-meta">
+                                    <h2><a href="@Url.Action("Details","Freelancer",new{id=@freelancer.idMember})" class=" opening-name">@freelancer.Member.firstname @freelancer.Member.firstname </a></h2>
+                                    <h3><a href="" class="company">@freelancer.Member.city</a></h3>
+                                </td>
+                                <td class="opening-type"><p class="contract">@freelancer.Missions1.Count</p></td>
+                            </tr>
 
+                        }
+
+
+                    }
+                </table>
+                <!-- .openings -->
+            </div>
+            <!-- .table-wrapper -->
+        </div>
     </div>
-    <!-- /Content Inner -->
-
+    <!-- .content -->
+    <aside class="sidebar">
+        <div class="widget add-opening">
+            <a href="@Url.Action("Create","Mission")"><button>Add Mission</button></a>
+            <div class="plus">+</div>
+        </div>
+        <!-- .add-opening -->
+        <div class="widget">
+            <h3>Text widget</h3>
+            <p>Proin at risus augue. Proin sapien est, convallis vitae ligula vitae, fermentum viverra erat.</p>
+        </div>
+        <!-- text widget -->
+        <div class="widget newsletter">
+            <h3>Newsletter</h3>
+            <input name="email" type="email" />
+            <p class="info"><span class="required">*</span> You will get a notification email</p>
+        </div>
+        <!-- .newsletter -->
+        <div class="widget video">
+            <iframe width="242" height="151" src="http://www.youtube.com/embed/H1pWTxVVc2E?list=UU5L2rnrf7WCd8GaqsZvnJOw" frameborder="0" allowfullscreen></iframe>
+            <p class="video-title">Video title usage example</p>
+        </div>
+        <!-- .video -->
+    </aside>
+    <!-- .sidebar -->
 </div>
-
-
-@section stories
-{
-<div id="stories" class="block border">
-    <div class="inner">
-        <section class="row-fluid">
-            <section class="span12 storyblock">
-                <h2>Latest Evaluations</h2>
-                <div class="block-content butt-flexslider">
-                    <ul class="slides">
-                        <li class="user-avatar">
-                            <a href="#">
-                                <img src="~/Content/content/users-avatar/user-1.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-2.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-3.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-4.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-5.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-2.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-3.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a>
-                        </li>
-                        <li class="user-avatar">
-                            <a href="#">
-                                <img src="~/Content/content/users-avatar/user-5.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-4.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-3.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-2.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-1.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-2.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-3.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a>
-                        </li>
-                        <li class="user-avatar">
-                            <a href="#">
-                                <img src="~/Content/content/users-avatar/user-3.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-2.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-5.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-4.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-1.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-2.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-3.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a>
-                        </li>
-                        <li class="user-avatar">
-                            <a href="#">
-                                <img src="~/Content/content/users-avatar/user-1.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-4.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-2.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-5.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-3.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-2.jpg" alt="User" height="114" width="113" />
-                                <div class="effect"></div>
-                            </a> <a href="#">
-                                <img src="~/Content/content/users-avatar/user-3.jpg" alt="User" height="114" width="114" />
-                                <div class="effect"></div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </section>
-    </div>
-</div>
-}
+<!-- .main -->

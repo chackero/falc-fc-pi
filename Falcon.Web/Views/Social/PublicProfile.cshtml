@@ -1,0 +1,167 @@
+﻿@using Falcon.Domain.Models
+@using Microsoft.AspNet.Identity
+@model Falcon.Domain.Models.Freelancer
+@{
+    ViewBag.Title = "PublicProfile";
+    Layout = "~/Views/Shared/_FalconSocialLayout.cshtml";
+    var ftp = "ftp://falcon:falcon@localhost/";
+    var idsender = User.Identity.GetUserId<int>();
+    var idreceiver = Model.idMember;
+}
+
+<div class="container">
+    <div class="cover profile">
+        <div class="wrapper">
+            <div class="image">
+                <img src="~/Content/social/images/profile-cover.jpg" alt="people" />
+            </div>
+            <ul class="friends">
+                @{
+                    foreach (Freelancer friend in Model.Freelancers)
+                    {
+                        <li>
+                            <a href="@Url.Action("Details","Freelancer",new{id=friend.idMember})">
+                                <img src="@ftp@friend.Member.Document.path" alt="people" class="img-responsive">
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="cover-info">
+            <div class="avatar">
+                <img src="@ftp@Model.Member.Document.path" alt="people" />
+            </div>
+            <div class="name">
+                <a href="#">
+                    @Model.Member.firstname @Model.Member.lastname
+                </a>
+            </div>
+            <ul class="cover-nav">
+                <li>
+                    <a href="index.html"><i class="fa fa-fw icon-ship-wheel"></i> Timeline</a>
+                </li>
+                <li class="active">
+                    <a href="user-public-profile.html"><i class="fa fa-fw icon-user-1"></i> About</a>
+                </li>
+                <li>
+                    <a href="user-public-users.html"><i class="fa fa-fw fa-users"></i> Friends</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default share">
+        <div class="input-group">
+            <div class="input-group-btn" id="send-message">
+                <a class="btn btn-primary" href=""><i class="fa fa-envelope"></i>Send</a>
+            </div>
+
+            <!-- /btn-group -->
+            <input type="text" class="form-control share-text" id="message-content" placeholder="Write message..." />
+        </div>
+
+        <!-- /input-group -->
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading panel-heading-gray">
+            <a href="#" class="btn btn-white btn-xs pull-right"><i class="fa fa-pencil"></i></a>
+            <i class="fa fa-info-circle"></i> About
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled profile-about">
+                <li>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span class="text-muted">Firstname</span>
+                        </div>
+                        <div class="col-sm-8">@Model.Member.firstname</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span class="text-muted">Last Name</span>
+                        </div>
+                        <div class="col-sm-8">@Model.Member.lastname</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span class="text-muted">Address</span>
+                        </div>
+                        <div class="col-sm-8">@Model.Member.city</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span class="text-muted">City</span>
+                        </div>
+                        <div class="col-sm-8">@Model.Member.city</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span class="text-muted">Number of friends</span>
+                        </div>
+                        <div class="col-sm-8">@Model.Freelancers.Count</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading panel-heading-gray">
+            <a href="#" class="btn btn-white btn-xs pull-right"><i class="fa fa-pencil"></i></a>
+            <i class="fa fa-info-circle"></i> Circles
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled profile-about">
+                @{
+                    foreach (var circle in @Model.Circles)
+                    {
+                        <li>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <span class="text-muted">@circle.name</span>
+                                </div>
+                                <div class="col-sm-8">@circle.description</div>
+                            </div>
+                        </li>
+                    }
+                }
+                @{
+                    foreach (var circle in @Model.Circles1)
+                    {
+                        <li>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <span class="text-muted">@circle.name</span>
+                                </div>
+                                <div class="col-sm-8">@circle.description</div>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="~/Content/js/jquery-1.9.1.js"></script>
+<script>
+    $("#send-message").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("SendMessage")',
+            data: { idsender: "@idsender", idreceiver: "@idreceiver", body:$("#message-content").val() }
+                })
+                .done(function (msg) {
+                    addmessage();
+                });
+            });
+    function addmessage() {
+                $("#message-content").val("");
+            }
+</script>

@@ -1,0 +1,53 @@
+﻿@using Falcon.Data
+@using Microsoft.AspNet.Identity
+@{
+    var manager = new MembersManager(new CustomUserStore());
+    var user = manager.FindById(User.Identity.GetUserId<int>());
+    var path = "~/Content/v2/images/avatar.png";
+    if (User.Identity.IsAuthenticated)
+    {
+        if (user.Document != null)
+        {
+            path = "ftp://falcon:falcon@localhost/" + user.Document.path;
+        }
+    }
+    
+}
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+    <ul class="nav navbar-nav navbar-right">
+        <!-- User -->
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
+                <img src="@path" alt="Bill" class="img-circle" width="40" /> @User.Identity.Name <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    @Html.ActionLink("User Profile Settings !", "Index", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li>
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="@Url.Action("Login","Account")" class="user" >
+                <img src="~/Content/v2/images/login.png" class="img-circle" width="40" /> Sign In
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Register","Account")" class="user">
+                <img src="~/Content/v2/images/register.png" class="img-circle" width="40" /> Register
+            </a>
+        </li>
+    </ul>
+ }

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <!--[if IE 7]><html class = "ie7"><![endif]-->
 <!--[if IE 8]><html class = "ie8"><![endif]-->
 <!--[if IE 9]><html class = "ie9"><![endif]-->
@@ -6,7 +7,7 @@
 <html>
     <!--<![endif]-->
     <head>
-        <title>Opening - Job Board HTML Template</title>
+        <title>Falcon Freelance Community</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="~/Content/v2/css/style.css" />
         <link rel="stylesheet" type="text/css" href="~/Content/v2/css/font-awesome.min.css" />
@@ -19,27 +20,37 @@
             <header>
                 <div class="site-header">
                     <div class="site-title">
-                        <a href="home_v.1.html"><img src="~/Content/v2/images/falcon_logo.png" alt="*" /></a>
+                        <a href="@Url.Action("Index","Home")"><img src="~/Content/v2/images/falcon_logo.png" alt="*" /></a>
                     </div>
                     <!-- .site-title -->
                     <nav class="site-nav">
                         <ul>
                             <li class="current_page_item">
-                                <a href="home_v.1.html">Home</a>
+                                <a href="@Url.Action("Index","Home")">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">Freelancers</a>
                                 <ul class="sub-menu">
-                                    <li class="current_page_item"><a href="home_v.1.html">Home 1</a></li>
-                                    <li><a href="home_v.2.html">Home 2</a></li>
-                                    <li><a href="home_v.3.html">Home 3</a></li>
+                                    <li><a href="@Url.Action("Index","Account")">Account</a></li>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <li><a href="@Url.Action("Details","Freelancer",new{id=User.Identity.GetUserId<int>()})">Profile</a></li>
+                                    }
+                                    
+                                    <li><a href="@Url.Action("Index","Mission")">Search For A Mission</a></li>
+                                    <li><a href="@Url.Action("Timeline","Social")">Social Network</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Pages</a>
+                                <a href="#">Owners</a>
                                 <ul class="sub-menu">
-                                    <li><a href="opening.html">Opening</a></li>
-                                    <li><a href="add_opening.html">Add Opening</a></li>
-                                    <li><a href="company_profile.html">Company Profile</a></li>
-                                    <li><a href="company_profile_settings.html">Company Profile Settings</a></li>
-                                    <li><a href="search_results_left_aside.html">Search Results Left Aside</a></li>
+                                    <li><a href="@Url.Action("Index","Account")">Account</a></li>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <li><a href="@Url.Action("Details","Owner",new{id=User.Identity.GetUserId<int>()})">Profile</a></li>
+                                    }
+
+                                    <li><a href="@Url.Action("Create","Mission")">Create A Mission</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -59,19 +70,17 @@
             <footer>
                 <div class="site-footer">
                     <div class="site-title">
-                        <a href="home_v.1.html"><img src="images/logo.png" alt="*" /></a>
-                        <h1><a href="home_v.1.html">Opening</a></h1>
+                        <a href="@Url.Action("Index","Home")"><img src="~/Content/v2/images/logo.png" alt="*" /></a>
+                        <h1><a href="@Url.Action("Index","Home")">Falcon</a></h1>
                     </div>
                     <!-- .site-title -->
                     <nav class="site-nav">
                         <ul>
-                            <li><a href="http://bestwebsoft.com/about/">About</a></li>
-                            <li><a href="http://bestwebsoft.com/plugin/">Products</a></li>
-                            <li><a href="http://support.bestwebsoft.com/">Support Forum</a></li>
+                            <li><a href="http://esprit.ens.tn">About</a></li>
                         </ul>
                     </nav>
                     <!-- .site-nav -->
-                    <div class="links"><a class="facebook" href="https://www.facebook.com/bestwebsoft"></a><a class="twitter" href="https://twitter.com/bestwebsoft"></a><a class="youtube" href="http://www.youtube.com/bestwebsoft"></a></div>
+                    <div class="links"><a class="facebook" href="https://www.facebook.com/chaker.laaribi"></a></div>
                     <!-- .links -->
                 </div>
                 <!-- .site-footer -->
