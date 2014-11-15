@@ -1125,9 +1125,10 @@ img.slide-phone {
     cursor: pointer;
     font: 14px OpenSans-Bold;
     color: #fff;
-    float: right;
-    padding: 12px 24px;
+    padding: 12px 12px;
+    width: 80%;
     margin-top: 2px;
+    margin-left: 10%;
     text-transform: uppercase;
     text-shadow: 0 1px 0 #b34c36;
     position: relative

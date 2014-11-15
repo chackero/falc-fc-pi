@@ -32,5 +32,24 @@ namespace Falcon.Domain.Models
         public virtual Owner Owner { get; set; }
         public virtual ICollection<Freelancer> Freelancers { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
+
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
+            
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            return idMission.Equals(((Mission)obj).idMission);
+            
+        }
+
+// override object.GetHashCode
+        public override int GetHashCode()
+        {
+           return idMission.GetHashCode();
+        }
     }
 }

@@ -929,6 +929,7 @@
     <Content Include="Content\v2\images\login.png" />
     <Content Include="Content\v2\images\logo.png" />
     <Content Include="Content\v2\images\mail-bg.png" />
+    <Content Include="Content\v2\images\mission-header.jpg" />
     <Content Include="Content\v2\images\no-results.png" />
     <Content Include="Content\v2\images\opening-header.jpg" />
     <Content Include="Content\v2\images\opening-location.png" />
@@ -1082,6 +1083,15 @@
     <Content Include="Views\Owner\Details.cshtml" />
     <Content Include="Views\Mission\Create.cshtml" />
     <Content Include="Views\Mission\Edit.cshtml" />
+    <Content Include="Views\Mission\Index.cshtml" />
+    <Content Include="Views\Shared\_MissionSearch.cshtml" />
+    <Content Include="Views\Mission\SearchByCategoryAndCity.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Freelancer.cshtml" />
+    <Content Include="Views\Account\Owner.cshtml" />
+    <Content Include="Views\Owner\Edit.cshtml" />
+    <Content Include="Views\Freelancer\Edit.cshtml" />
+    <Content Include="Views\Mission\WorkSpace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

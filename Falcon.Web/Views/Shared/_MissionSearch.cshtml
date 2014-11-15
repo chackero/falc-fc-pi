@@ -1,0 +1,93 @@
+﻿@using Falcon.Domain.Models
+@model IEnumerable<Category>
+    <div class="search-wrapper">
+        <form class="opening-search" method="post" action="@Url.Action("SearchBYCategoryAndCity", "Mission")">
+            <div class="search-top clearfix">
+                <div class="center">
+                    <div class="search-field">
+                        <label>
+                            Minimum Budget<br />
+                            <input name="keyword" id="keyword" type="text" placeholder="City" />
+                        </label>
+                    </div>
+                    <div class="search-field">
+                        <label>
+                            Category<br />
+                            <input readonly="true" class="with-dropdown" name="category" id="category" type="text" placeholder="Category" />
+                        </label>
+                        <ul id="dropdown-category" class="dropdown">
+
+                            @{
+                                foreach (Category categ in Model)
+                                {
+                                    <li class="checked">
+                                        <!-- <input  name="categories" type="radio" name="categorie" value="@categ.name" />
+                                            -->
+                                        <div class="mm" name="categoryName">@categ.name</div>
+
+                                    </li>
+                                }
+
+                            }
+                        </ul>
+                        <!-- #category -->
+                    </div>
+                    <button class="search-button" type="submit"></button>
+                </div>
+                <!-- .center -->
+            </div>
+            <!-- .search-top -->
+            <div class="search-bottom">
+                <div class="center">
+                    <label class="full-time">
+                        <input class="dark" name="full-time" type="checkbox" />
+                        Full-time
+                    </label>
+                    <label class="contract">
+                        <input class="dark" name="contract" type="checkbox" />
+                        Contract
+                    </label>
+                    <label class="freelance">
+                        <input class="dark" checked name="freelance" type="checkbox" />
+                        Freelance
+                    </label>
+                </div>
+                <!-- .ceneter -->
+            </div>
+            <!-- .search-bottom -->
+        </form>
+    </div>
+    <script src="~/Content/js/jquery-1.9.1.js"></script>
+    <script>
+        //$(document).ready(function () {
+        //    var all = $("#dropdown-category").find("li");
+        //    $("#dropdown-category").find("li").each(function () {
+
+        //        $(this).bind("click", function () {
+
+        //            $(all).each(function() {
+        //                $(this).removeClass('checked');
+        //            });
+        //            $(this).addClass("checked");
+        //            var current = $(this).next().find("input").first();
+        //            var name = $(this).text().trim();
+        //            $("#dropdown-category").find("input").each(function() {
+        //                if ($(this) != $(current)) {
+        //                    $(this).removeAttr('checked');
+        //                }
+        //            });
+        //            $(current).attr('checked', 'checked');
+        //            $("#category").attr('placeholder', name);
+
+        //        });
+        //    });
+        //});
+
+        $(document).ready(function () {
+            $(".checked").click(function () {
+                $("#category").val($(this).find(".mm").html());
+                $("#category").attr("value", $(this).find(".mm").html());
+                $("#dropdown-category").hide();
+            });
+        });
+    </script>

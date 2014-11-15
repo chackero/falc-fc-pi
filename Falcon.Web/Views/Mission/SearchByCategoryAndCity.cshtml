@@ -1,0 +1,194 @@
+﻿@using System.Web.Razor.Tokenizer.Symbols
+@using Falcon.Domain.Models
+@model IEnumerable<Falcon.Domain.Models.Mission>
+
+@{
+    ViewBag.Title = "SearchByCategoryAndCity";
+    Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
+    List<Category> categories = ViewBag.Categories;
+    List<string> cities = ViewBag.locations;
+    //List<Mission> missions = ViewBag.Missions;
+}
+
+
+                      <div class="wrapper full-width left-sidebar">
+
+                          <div class="search-wrapper">
+                              <form class="opening-search" method="post" action="@Url.Action("SearchBYCategoryAndCity", "MissionController", new { city = "Sousse", categoryName =""})">
+                                  <div class="search-top clearfix">
+                                      <div class="center">
+                                          <div class="search-field">
+                                              <label>
+                                                  City<br />
+                                                  <input name="keyword" id="keyword" type="text" placeholder="City" />
+                                              </label>
+                                          </div>
+                                          <div class="search-field">
+                                              <label>
+                                                  Category<br />
+                                                  <input readonly="true" class="with-dropdown" id="category" type="text" placeholder="Category" />
+                                              </label>
+                                              <ul id="dropdown-category" class="dropdown">
+
+                                                  @{
+                                                      foreach (Category categ in categories)
+                                                      {
+                                                          <li class="checked">
+                                                              <!-- <input  name="categories" type="radio" name="categorie" value="@categ.name" />
+                                                -->
+                                                              <div class="mm" name="categoryName">@categ.name</div>
+
+                                                          </li>
+                                                      }
+
+                                                  }
+                                              </ul>
+                                              <!-- #category -->
+                                          </div>
+                                          <button class="search-button" type="submit"></button>
+                                      </div>
+                                      <!-- .center -->
+                                  </div>
+                                  <!-- .search-top -->
+                                  <div class="search-bottom">
+                                      <div class="center">
+                                          <label class="full-time">
+                                              <input class="dark" name="full-time" type="checkbox" />
+                                              Full-time
+                                          </label>
+                                          <label class="contract">
+                                              <input class="dark" name="contract" type="checkbox" />
+                                              Contract
+                                          </label>
+                                          <label class="freelance">
+                                              <input class="dark" checked name="freelance" type="checkbox" />
+                                              Freelance
+                                          </label>
+                                      </div>
+                                      <!-- .ceneter -->
+                                  </div>
+                                  <!-- .search-bottom -->
+                              </form>
+                              <!-- .opening-search -->
+                          </div>
+                          <!-- .search-wrapper -->
+                          <div class="main clearfix">
+                              <div class="content">
+                                  <div class="post">
+                                      <div class="post-header">
+                                          <p class="results"><span>5</span> of <span>62</span> opening(-s)</p>
+                                          <label class="sort">
+                                              Sort:
+                                              <select>
+                                                  <option>By date</option>
+                                                  <option>By name</option>
+                                              </select>
+                                          </label>
+                                          <!-- .sort -->
+                                      </div>
+                                      <!-- .post_header -->
+                                      <div class="table-wrapper">
+                                          <table class="openings">
+                                              @{
+                                                  foreach (Mission m in @Model)
+                                                  {
+                                                      <tr class="opening">
+                                                          <td class="opening-logo">
+                                                              <div class="star"></div>
+                                                              <a href="#"><img src="~/Content/images/avatar_male.png" alt="Logo" width="97" height="97" /></a>
+                                                          </td>
+                                                          <td class="opening-meta">
+                                                              <h2><a href="@Url.Action("Details","Mission",new{id=@m.idMission})" class=" opening-name">@m.title.ToUpperInvariant()</a></h2>
+                                                              <h3><a href="company_profile.html" class="company">@m.Owner.companyName.ToUpperInvariant()</a></h3>
+                                                          </td>
+                                                          <td class="opening-type"><p class="freelance">@m.budget$</p></td>
+                                                          <td class="opening-location"><p><a href="#">@m.deadline</a></p></td>
+                                                      </tr>
+
+                                                  }
+
+
+                                              }
+                                          </table>
+                                          <!-- .openings -->
+                                      </div>
+                                      <!-- .table-wrapper -->
+                                  </div>
+                                  <!-- .openings -->
+                                  <nav class="paging">
+                                      <ul>
+                                          <li class="neighbour"><a href="home_v.1.html">Prev</a></li>
+                                          <li class="current"><a href="home_v.1.html">1</a></li>
+                                          <li><a href="home_v.1.html">2</a></li>
+                                          <li><a href="home_v.1.html">3</a></li>
+                                          <li><span class="dots">...</span></li>
+                                          <li><a href="home_v.1.html">10</a></li>
+                                          <li><a href="home_v.1.html">11</a></li>
+                                          <li><a href="home_v.1.html">12</a></li>
+                                          <li class="neighbour"><a href="home_v.1.html">Next</a></li>
+                                      </ul>
+                                  </nav>
+                                  <!-- .paging -->
+                              </div>
+                              <!-- .content -->
+                              <aside class="sidebar">
+                                  <div class="widget add-opening">
+                                      <button>Add opening</button>
+                                      <div class="plus">+</div>
+                                  </div>
+                                  <!-- .add-opening -->
+                                  <div class="widget newsletter">
+                                      <h3>Newsletter</h3>
+                                      <input name="email" type="email" />
+                                      <p class="info"><span class="required">*</span> You will get a notification email</p>
+                                  </div>
+                                  <!-- .newsletter -->
+                                  <div class="widget">
+                                      <h3>Text widget</h3>
+                                      <p>Proin at risus augue. Proin sapien est, convallis vitae ligula vitae, fermentum viverra erat.</p>
+                                  </div>
+                                  <!-- text widget -->
+                                  <div class="widget video">
+                                      <iframe width="242" height="151" src="http://www.youtube.com/embed/H1pWTxVVc2E?list=UU5L2rnrf7WCd8GaqsZvnJOw" frameborder="0" allowfullscreen></iframe>
+                                      <p class="video-title">Video title usage example</p>
+                                  </div>
+                                  <!-- .video -->
+                              </aside>
+                              <!-- .sidebar -->
+                          </div>
+                          <!-- .main -->
+
+
+                      </div>
+                      <script src="~/Content/js/jquery-1.9.1.js"></script>
+                      <script>
+                          //$(document).ready(function () {
+                          //    var all = $("#dropdown-category").find("li");
+                          //    $("#dropdown-category").find("li").each(function () {
+
+                          //        $(this).bind("click", function () {
+
+                          //            $(all).each(function() {
+                          //                $(this).removeClass('checked');
+                          //            });
+                          //            $(this).addClass("checked");
+                          //            var current = $(this).next().find("input").first();
+                          //            var name = $(this).text().trim();
+                          //            $("#dropdown-category").find("input").each(function() {
+                          //                if ($(this) != $(current)) {
+                          //                    $(this).removeAttr('checked');
+                          //                }
+                          //            });
+                          //            $(current).attr('checked', 'checked');
+                          //            $("#category").attr('placeholder', name);
+
+                          //        });
+                          //    });
+                          //});
+
+                          $(document).ready(function () {
+                              $(".checked").click(function () {
+                                  $("#category").val($(this).find(".mm").html());
+                              });
+                          });
+                      </script>

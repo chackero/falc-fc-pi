@@ -1,13 +1,31 @@
-﻿@model Falcon.Domain.Models.Mission
+﻿@using Falcon.Data
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
+@model Falcon.Domain.Models.Mission
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
+    var path = "ftp://falcon:falcon@localhost/"+Model.Owner.Document.path;
+    var id = User.Identity.GetUserId<int>();
+    var manager = HttpContext.Current.GetOwinContext().GetUserManager<MembersManager>();
+    var user = manager.FindById(id);
+    var condition = 1;
+    if (user.Freelancer != null)
+    {
+        if (user.Freelancer.Missions1.Contains(Model) )
+        {
+            condition = 2;
+        }
+        else { condition = 3; }
+        
+    }
+    
 }
 
 
 <div class="main clearfix">
-    <img class="opening-header no-image" src="../Content/v2/images/opening-header.jpg" alt="" />
+    <img class="opening-header" src="~/Content/v2/images/mission-header.jpg" alt="" />
     <div class="content">
         <div class="post opening-info">
             <div class="post-header">
@@ -51,20 +69,46 @@
             <!-- .post-footer -->
         </div>
         <!-- .post opening-info -->
-        <button class="submit-request">Submit request</button>
+        
+        @switch (condition)
+        {
+            case 2:
+                <button class="submit-request" disabled="disabled" >Already Applied</button>
+                break;
+            case 3:
+                <button class="submit-request" >Submit request</button>
+                break;
+        } 
+        
+        
     </div>
     <!-- .content -->
     <!-- .content -->
     <aside class="sidebar">
 
         <!-- .add-opening -->
+        <div class="widget">
+            <h3>Interested ?</h3>
+            
+            @switch (condition)
+            {
+                case 2:
+                    <button class="submit-request" disabled="disabled">Already Applied</button>
+                    break;
+                case 3:
+                    <button class="submit-request" id="apply">Submit request</button>
+                    <p>and wait for the confirmation.</p>
+                    break;
+            }
+            
+        </div>
         <div class="widget company-widget">
             <h3>@Model.Owner.companyName</h3>
             <div class="company-meta">
-                <img src="images/featured-company.png" alt="Company" />
+                <img src="@path" alt="Company" />
 
                 <p class="company-location">@Model.Owner.Member.city</p>
-                <a class="company-link" href="http://envato.com/">http://envato.com/</a>
+                <a class="company-link" href="@Model.Owner.Member.country">@Model.Owner.Member.country</a>
                 <p class="description">@Model.Owner.companyDescription</p>
             </div>
             <!-- .company-meta -->
@@ -85,19 +129,19 @@
             <h3>Similar Company</h3>
             <ul>
                 <li class="company-opening">
-                    <a href="opening.html"><img class="opening-logo" src="images/opening-logo.png" alt="Logo" /></a>
+                    <a href="opening.html"><img class="opening-logo" src="~/Content/v2/images/opening-logo.png" alt="Logo" /></a>
                     <h2 class="opening-name"><a href="opening.html">Graphic Designer</a></h2>
                     <p><a href="company_profile.html" class="company">Envato</a></p>
                 </li>
                 <!-- .company-opening -->
                 <li class="company-opening">
-                    <a href="opening.html"><img class="opening-logo" src="images/opening-logo.png" alt="Logo" /></a>
+                    <a href="opening.html"><img class="opening-logo" src="~/Content/v2/images/opening-logo.png" alt="Logo" /></a>
                     <h2 class="opening-name"><a href="opening.html">Web Developer</a></h2>
                     <p><a href="company_profile.html" class="company">Envato</a></p>
                 </li>
                 <!-- .company-opening -->
                 <li class="company-opening">
-                    <a href="opening.html"><img class="opening-logo" src="images/opening-logo.png" alt="Logo" /></a>
+                    <a href="opening.html"><img class="opening-logo" src="~/Content/v2/images/opening-logo.png" alt="Logo" /></a>
                     <h2 class="opening-name"><a href="opening.html">UX Designer</a></h2>
                     <p><a href="company_profile.html" class="company">Envato</a></p>
                 </li>
@@ -110,3 +154,20 @@
     <!-- .sidebar -->
 </div>
 
+<script src="~/Content/js/jquery-1.9.1.js"></script>
+<script>
+    $(".submit-request").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ApplyForMission")',
+            data: { id: "@id", idMission: "@Model.idMission" }
+        })
+                .done(function (msg) {
+                    addmessage();
+                });
+    });
+    function addmessage() {
+        alert("submitted");
+        $(".submit-request").text("Submitted");
+    }
+</script>

@@ -16,9 +16,16 @@ namespace Falcon.Web.Controllers
     {
         FalconService falconService = new FalconService();
         // GET: Mission
-        public ActionResult Index()
+        public ActionResult Index(IEnumerable<Mission> model)
         {
-            return View();
+            if (model == null)
+            {
+                model = falconService.GetMissions().ToList();
+            }
+            List<string> locations = new List<string>();
+            ViewBag.Locations = locations;
+            ViewBag.Categories = falconService.GetCategories().ToList();
+            return View(model);
         }
 
         // GET: Mission/Details/5
@@ -117,6 +124,61 @@ namespace Falcon.Web.Controllers
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public ActionResult SearchByCategoryAndCity(FormCollection formCollection)
+        {
+            var form = formCollection;
+            var categoryName = form["ca"];
+            var budget = form["keyword"];
+            ViewBag.Categories = falconService.GetCategories().ToList();
+            var budgetf = Convert.ToDouble(budget);
+            if (budgetf == null && categoryName == null) return View("Index",falconService.GetMissions().ToList());
+            if (budgetf == null && categoryName != null) return View("Index",falconService.GetMissionsByCategory(categoryName).ToList());
+            if (budgetf != null && categoryName == null) return View("Index",falconService.GetMissionsByBudget(budgetf).ToList());
+            return RedirectToAction("Index", falconService.GetMissionsByCategoryNameAndBudget(categoryName, budgetf).ToList());
+            /*
+            List<Mission> missions = falconService.GetMissions();
+            List<Mission> missionsbyname = falconService.GetMissionsByCategory(categoryName);
+            List<Mission> missionsbycity = falconService.GetMissionsByBudget(budgetf);
+            List<Mission> missionsbycityandcategoryName = falconService.GetMissionsByCategoryNameAndBudget(categoryName, budgetf);
+            ViewBag.Categories = falconService.GetCategories().ToList();
+            ViewBag.Missions = falconService.GetMissions().ToList();
+            if (budgetf == null && categoryName == null)
+                return View(missions.ToList());
+            else if (budgetf != null && categoryName == null)
+                return View(missionsbycity.ToList());
+            else if (budgetf == null)
+                return View(missionsbycity.ToList());
+            else
+                return View(missionsbycityandcategoryName.ToList());
+            */
+        }
+
+        public ActionResult WorkSpace(int id)
+        {
+            var service = new FalconService();
+            var mission = service.getMissionById(id);
+            return View(mission);
+        }
+
+        public ActionResult AddPost(string content, int idMission,int id)
+        {
+            var p = new Post
+            {
+                content = content,
+                poster_idMember = id
+            };
+            falconService.UnitOfWork.PostRepository.Add(p);
+            falconService.getMissionById(idMission).Posts.Add(p);
+            falconService.UnitOfWork.Commit();
+            return Json(data: "added");
+        }
+        public ActionResult ApplyForMission(int idMission, int id)
+        {
+            falconService.getMissionById(idMission).Freelancers.Add(falconService.GetFreelancerById(id));
+            falconService.UnitOfWork.Commit();
+            return Json(data: "added");
         }
     }
 }

@@ -1,0 +1,135 @@
+﻿@using Falcon.Domain.Models
+@using Microsoft.AspNet.Identity
+@model Falcon.Domain.Models.Mission
+
+@{
+    ViewBag.Title = "WorkSpace";
+    Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
+    var id = User.Identity.GetUserId<int>();
+    var idMission = Model.idMission;
+ }
+        <div class="main clearfix">
+            <img class="opening-header" src="~/Content/v2/images/mission-header.jpg" alt="">
+            <div class="content">
+                <div class="post opening-info">
+                    <div class="post-header">
+                        <h2>@Model.title</h2>
+                        <p class="opening-type contract">@Model.status</p>
+                        <p class="posted-on">posted on <span>@Model.postDate</span></p>
+                    </div>
+                    <!-- .post-header -->
+                    <table id="posts-tab">
+                        @{
+                            foreach (Post post in Model.Posts)
+                            {
+                                <tr>
+                                    <th scope="row">@post.Member.username said:</th>
+                                    <td><p>@post.content</p></td>
+
+                                </tr>
+                                if (post.Documents.Count > 0)
+                                {
+                                    <tr>
+                                        <th scope="row">Files : </th>
+                                        <td>
+                                            @foreach (Document doc in post.Documents)
+                                            {
+                                                <a href="@Url.Content(doc.path)">
+                                                    <label>
+                                                        <input class="file-down dark" name="filter" type="button" />
+                                                        @doc.path.Substring(@doc.path.LastIndexOf('/') + 1, @doc.path.Length - @doc.path.LastIndexOf('/') - 1)
+                                                    </label>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </table>
+                    <form action="#" class="settings-field">
+                        <input class="text-box" type="text" id="message" placeholder="Write a message" />
+                    </form>
+                    <div class="post-footer"><a class="save-job" href="#">Save job</a><a class="print" href="#">Print this job</a><a class="report" href="#">Report this job</a><a class="edit-link" href="#">[Edit]</a></div>
+                    <!-- .post-footer -->
+                </div>
+                <!-- .post opening-info -->
+                <button class="submit-request" id="send">Post</button>
+            </div>
+            <!-- .content -->
+            <aside class="sidebar">
+                <div class="widget add-opening">
+                    <button>Add opening</button>
+                    <div class="plus">+</div>
+                </div>
+                <!-- .add-opening -->
+                <div class="widget company-widget">
+                    <h3>Envato</h3>
+                    <div class="company-meta">
+                        <img src="images/featured-company.png" alt="Company" />
+                        <div class="count">21</div>
+                        <p class="company-location">New York</p>
+                        <a class="company-link" href="http://envato.com/">http://envato.com/</a>
+                        <p class="description">Our company is constantly developing, we provide high_quality web and mobile applications and websites for companies from all over the world.</p>
+                    </div>
+                    <!-- .company-meta -->
+                    <div class="contacts">
+                        <ul class="phones">
+                            <li>+1 (555) 333 - 55 - 33</li>
+                            <li>+1 (000) 777 - 66 - 77</li>
+                        </ul>
+                        <ul class="emails">
+                            <li>cv@envato.com</li>
+                            <li>info@envato.com</li>
+                        </ul>
+                    </div>
+                    <!-- ,contacts -->
+                </div>
+                <!-- .company-widget -->
+                <div class="widget company-openings">
+                    <h3>Company openings</h3>
+                    <ul>
+                        <li class="company-opening">
+                            <a href="opening.html"><img class="opening-logo" src="images/opening-logo.png" alt="Logo" /></a>
+                            <h2 class="opening-name"><a href="opening.html">Graphic Designer</a></h2>
+                            <p><a href="company_profile.html" class="company">Envato</a></p>
+                        </li>
+                        <!-- .company-opening -->
+                        <li class="company-opening">
+                            <a href="opening.html"><img class="opening-logo" src="images/opening-logo.png" alt="Logo" /></a>
+                            <h2 class="opening-name"><a href="opening.html">Web Developer</a></h2>
+                            <p><a href="company_profile.html" class="company">Envato</a></p>
+                        </li>
+                        <!-- .company-opening -->
+                        <li class="company-opening">
+                            <a href="opening.html"><img class="opening-logo" src="images/opening-logo.png" alt="Logo" /></a>
+                            <h2 class="opening-name"><a href="opening.html">UX Designer</a></h2>
+                            <p><a href="company_profile.html" class="company">Envato</a></p>
+                        </li>
+                        <!-- .company-opening -->
+                    </ul>
+                    <p class="widget-footer"><a href="opening.html">See all openings of this company</a></p>
+                </div>
+                <!-- .company-openings -->
+            </aside>
+            <!-- .sidebar -->
+        </div>
+        <!-- .main -->
+        <script src="~/Content/js/jquery-1.9.1.js"></script>
+        <script>
+    $("#send").on("click", function() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddPost")',
+            data: { id: "@id", idMission: "@idMission", content:$("#message").val() }
+                })
+                .done(function (msg) {
+                    alert("Data Saved: " + msg);
+                    addmessage();
+                });
+            });
+            function addmessage() {
+                $("#posts-tab").append("<tr><th scope='row'>@User.Identity.Name said:</th><td><p>" + $('#message').val() + "</p></td></tr>");
+                $("#message").val("");
+            }
+        </script>

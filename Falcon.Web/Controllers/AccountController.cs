@@ -1,4 +1,5 @@
-﻿using Falcon.Data;
+﻿using Antlr.Runtime.Misc;
+using Falcon.Data;
 using Falcon.Domain.Models;
 using Falcon.Service;
 using Falcon.Web.Models;
@@ -39,6 +40,22 @@ namespace Falcon.Web.Controllers
             }
         }
 
+        public ActionResult Index()
+        {
+            var current = UserManager.FindById(User.Identity.GetUserId<int>());
+            if (current.role.Equals("Freelancer")) return View("Freelancer", current.Freelancer);
+            return View("Owner", current.Owner);
+        }
+
+        public ActionResult Freelancer(Freelancer model)
+        {
+             return View(model);
+        }
+
+        public ActionResult Owner(Owner model)
+        {
+            return View(model);
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]

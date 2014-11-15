@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Falcon.Data;
@@ -89,25 +90,55 @@ namespace Falcon.Web.Controllers
         }
 
         // GET: Owner/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            return View();
+            var owner = falconService.GetOwnerById(User.Identity.GetUserId<int>());
+            return View(owner);
         }
 
         // POST: Owner/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(FormCollection collection, Owner model, HttpPostedFileBase editedlogo)
         {
-            try
+            var owner = falconService.GetOwnerById(User.Identity.GetUserId<int>());
+            var member = UserManager.FindById(User.Identity.GetUserId<int>());
+            if (collection["oldpass"].Length > 0)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId<int>(), collection["oldpass"],
+                    collection["newpassword"]);
+                if (!result.Succeeded)
+                {
+                    return View(model);
+                }
             }
-            catch
+            Document doc = null;
+            if (editedlogo != null)
             {
-                return View();
+                const string temppath = @"D:\Temp\";
+                string filename = "profile_" + User.Identity.Name + ".png";
+                var path = temppath + filename;
+                if (System.IO.File.Exists(temppath + filename))
+                {
+                    System.IO.File.Delete(path);
+                }
+                editedlogo.SaveAs(path);
+                FalconUtils.UploadToFtp("/Owners/Logos/", path);
+                if (owner.Document == null)
+                {
+                    doc = new Document
+                    {
+                        path = "/Owners/Logos/" + filename,
+                        type = "logo"
+                    };
+                    owner.Document = doc;
+                }
             }
+            owner.companyName = model.companyName;
+            owner.companyDescription = model.companyDescription;
+            UserManager.Update(member);
+            falconService.UnitOfWork.Commit();
+            falconService.EditOwner(owner);
+            return RedirectToAction("Details", new {id=owner.idMember});
         }
 
         // GET: Owner/Delete/5

@@ -1,0 +1,79 @@
+﻿@model Falcon.Domain.Models.Freelancer
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
+    var picpath = Url.Content("~/Content/v2/images/freelancer-logo.png");
+    var member = Model.Member;
+    if (Model.Member.Document != null)
+    {
+        picpath = "ftp://falcon:falcon@localhost/" + Model.Member.Document.path;
+    }
+}
+
+<div class="main clearfix">
+    <div class="content">
+        @using (Html.BeginForm("Edit", "Freelancer", new { ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="post edit-company">
+                <div class="post-header">
+                    <h2>Edit your account</h2>
+                    <a class="company-openings" href="@Url.Action("Details", new {id = @Model.idMember})">View my profile</a>
+                </div>
+                <!-- .post-header -->
+                <ul>
+                    <li class="settings-field">
+                        <img class="user-avatar" src="@picpath" alt="" />
+                        @Html.EditorFor(model => model.Member.UserName, new { htmlAttributes = new { placeholder = "Username", disabled = true } })
+                        <div id="contacts">
+                            @Html.EditorFor(model => model.Member.Email, new { htmlAttributes = new { placeholder = "Email", disabled = true } })
+                        </div>
+                        <br />
+                        <p class="info"><span class="required">*</span> You can't edit these fields</p>
+                    </li>
+                    <!-- .settings-field -->
+                    <li class="settings-field">
+
+                        <input name="editedlogo" type="file" />
+                        <p class="info"><span class="required">*</span> You can upload a new profile picture</p>
+                    </li>
+                    <!-- .settings-field -->
+                    <li class="settings-field">
+                        <h3>Change your password</h3><br />
+                        <input name="oldpass" type="password" placeholder="Old Pass" /><br />
+                        <input name="newpassword" type="password" placeholder="New password" /><br />
+                        <input name="confirm-password" type="password" placeholder="New password" />
+                        <p class="info"><span class="required">*</span> This is optional</p>
+                    </li>
+                    <li class="settings-field">
+                        <label>Firstname:</label>
+                        <input name="firstname" type="text" value="@Model.Member.firstname" placeholder="Firstname" /><br />
+                        <label>Lastname:</label>
+                        <input name="lastname" type="text" value="@Model.Member.lastname" placeholder="Lastname" /><br />
+                    </li>
+                    <!-- .settings-field -->
+                </ul>
+            </div>
+            <!-- .post -->
+            <input type="submit" value="save" />
+            <input type="reset" value="cancel" />
+        }
+        <!-- form -->
+    </div>
+    <!-- .content -->
+    <aside class="sidebar">
+        <div class="widget add-opening">
+            <button>Add opening</button>
+            <div class="plus">+</div>
+        </div>
+        <!-- .add-openings -->
+        <div class="widget">
+            <h3>Text widget</h3>
+            <p>Proin at risus augue. Proin sapien est, convallis vitae ligula vitae, fermentum viverra erat.</p>
+        </div>
+        <!-- text widget -->
+    </aside>
+    <!-- .sidebar -->
+</div>
+<!-- .main -->

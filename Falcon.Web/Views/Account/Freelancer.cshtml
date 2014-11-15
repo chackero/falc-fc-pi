@@ -1,0 +1,181 @@
+﻿@model Falcon.Domain.Models.Freelancer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_FalconLayout_v2.cshtml";
+    var picpath = Url.Content("~/Content/v2/images/freelancer-logo.png");
+    if (Model.Member.Document != null)
+    {
+        picpath = "ftp://falcon:falcon@localhost/" + Model.Member.Document.path;
+    }
+}
+<div class="main clearfix">
+    <div class="content">
+        <div class="post about" id="About">
+            <div class="post-header">
+                <h2>Profile Information</h2>
+                <a class="edit-link" href="@Url.Action("Edit","Freelancer")">[Edit]</a>
+            </div>
+            <!-- .post-header -->
+            <table>
+                <tr>
+                    <th><i class="fa fa-user-md"></i> Firstname</th>
+                    <td>@Model.Member.firstname </td>
+                </tr>
+                <tr>
+                    <th><i class="fa fa-user-md"></i> Lastname</th>
+                    <td>@Model.Member.lastname</td>
+                </tr>
+                <tr>
+                    <th><i class="fa fa-location-arrow"></i> Address</th>
+                    <td>
+                        <p>@Model.Member.country</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="fa fa-check-circle"></i> City</th>
+                    <td>
+                        <p>@Model.Member.city</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="fa fa-mail-reply"></i> Username</th>
+                    <td>
+                        <p>@Model.Member.username</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="fa fa-mail-forward"></i> Email Address</th>
+                    <td>
+                        <p>@Model.Member.Email</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="post about" id="CV">
+            <div class="post-header">
+                <h2>CV Information</h2>
+                <a class="edit-link" href="@Url.Action("Edit","CV")">[Edit]</a>
+            </div>
+            <!-- .post-header -->
+            <table>
+                <tr>
+                    <th><i class="fa fa-user-md"></i> Personal Statement</th>
+                    <td>@Model.CV.personalStatement </td>
+                </tr>
+                <tr>
+                    <th><i class="fa fa-area-chart"></i> Skills</th>
+                    <td>@Model.CV.skills</td>
+                </tr>
+                <tr>
+                    <th><i class="fa fa-language"></i> Languages</th>
+                    <td>
+                        <p>@Model.CV.languages</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="fa fa-compass"></i> Target Jobs</th>
+                    <td>
+                        <p>@Model.CV.targetJobs</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="fa fa-suitcase"></i> Work Experiences</th>
+                    <td>
+                        <p>@Model.CV.workExperience</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="post" id="M1">
+            <div class="post-header">
+                <p class="results">Missions you have worked on <span>@Model.Missions.Count</span> </p>
+                <!-- .sort -->
+            </div>
+            <!-- .post-header -->
+            <div class="table-wrapper">
+                <table class="openings">
+                    @foreach (var mission in Model.Missions)
+                    {
+                        <tr class="opening">
+                            <td class="opening-logo">
+                                <div class="star"></div>
+                                <a href="@Url.Action("Details","Mission",new{id=mission.idMission})"><img style="max-width: 60px;height: 80px;" src="ftp://falcon:falcon@localhost/@mission.Owner.Document.path" alt="Logo" /></a>
+                            </td>
+                            <td class="opening-meta">
+                                <h2><a href="@Url.Action("Details","Mission",new{id=mission.idMission})" class="opening-name">@mission.title</a></h2>
+                                <h3><a href="@Url.Action("Details","Owner",new{id=Model.idMember})" class="company">@mission.Owner.companyName</a></h3>
+                            </td>
+                            <td class="opening-type"><p class="opening-type contract">@mission.status</p></td>
+                            <td class="opening-location"><p><a href="#">@mission.Category.name</a></p></td>
+                            <td class="opening-type"><p class="freelance">@mission.budget<span>$</span></p></td>
+                        </tr>
+                    }
+
+                </table>
+                <!-- .openings -->
+            </div>
+        </div>
+        <div class="post" id="M2">
+            <div class="post-header">
+                <p class="results">Missions you have applied for <span>@Model.Missions1.Count</span> </p>
+                <!-- .sort -->
+            </div>
+            <!-- .post-header -->
+            <div class="table-wrapper">
+                <table class="openings">
+                    @foreach (var mission in Model.Missions1)
+                    {
+                        <tr class="opening">
+                            <td class="opening-logo">
+                                <div class="star"></div>
+                                <a href="@Url.Action("Details","Mission",new{id=mission.idMission})"><img style="max-width: 60px;height: 80px;" src="ftp://falcon:falcon@localhost/@mission.Owner.Document.path" alt="Logo" /></a>
+                            </td>
+                            <td class="opening-meta">
+                                <h2><a href="@Url.Action("Details","Mission",new{id=mission.idMission})" class="opening-name">@mission.title</a></h2>
+                                <h3><a href="@Url.Action("Details","Owner",new{id=Model.idMember})" class="company">@mission.Owner.companyName</a></h3>
+                            </td>
+                            <td class="opening-type"><p class="opening-type contract">@mission.status</p></td>
+                            <td class="opening-location"><p><a href="#">@mission.Category.name</a></p></td>
+                            <td class="opening-type"><p class="freelance">@mission.budget<span>$</span></p></td>
+                        </tr>
+                    }
+
+                </table>
+                <!-- .openings -->
+            </div>
+        </div>
+
+    </div>
+    <!-- .content -->
+    <aside class="sidebar">
+        <div class="widget company-widget">
+            <h3>@Model.Member.firstname @Model.Member.lastname</h3>
+            <div class="company-meta">
+                <div style="text-align: center">
+                    <img style="max-width: 110px;" src="@picpath" alt="@Model.Member.UserName" />
+                </div>
+                <a class="company-link" href="#About">Profile Info</a>
+                <a class="company-link" href="#CV">CV Info</a>
+                <a class="company-link" href="#M1">Missions</a>
+                <a class="company-link" href="#M2">Applied For </a>
+            </div>
+            <!-- .contacts -->
+        </div>
+        <div class="widget newsletter">
+            <h3>Ask question</h3>
+            <input name="email" type="email" />
+            <p class="info"><span class="required">*</span> You will get a response by email</p>
+        </div>
+        <!-- .newsletter -->
+    </aside>
+    <!-- .sidebar -->
+</div>
+<!-- .main -->
+<script src="~/Content/js/jquery-1.9.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".post .table-wrapper").css("height", "auto");
+        $(".post .table-wrapper .openings").css("position", "inherit");
+    });
+</script>

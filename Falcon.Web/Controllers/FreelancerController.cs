@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Falcon.Data;
 using Falcon.Domain.Models;
 using Falcon.Service;
 using Falcon.Web.Models;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Member = Falcon.Domain.Models.Member;
 
 namespace Falcon.Web.Controllers
 {
@@ -96,25 +92,57 @@ namespace Falcon.Web.Controllers
         }
 
         // GET: Freelancer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            return View();
+            var freelancer = falconService.GetFreelancerById(User.Identity.GetUserId<int>());
+            return View(freelancer);
         }
 
         // POST: Freelancer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(FormCollection collection, HttpPostedFileBase editedpicture, Freelancer model)
         {
-            try
+            var freelancer = falconService.GetFreelancerById(User.Identity.GetUserId<int>());
+            
+            var member = UserManager.FindById(User.Identity.GetUserId<int>());
+            if (collection["oldpass"].Length > 0)
             {
-                // TODO: Add update logic here
+                var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId<int>(), collection["oldpass"],
+                    collection["newpassword"]);
+                if (!result.Succeeded)
+                {
+                    return View(model);
+                }
+            }
+            Document doc = null;
+            if (editedpicture != null)
+            {
+                const string temppath = @"D:\Temp\";
+                string filename = "profile_" + User.Identity.Name + ".png";
+                var path = temppath + filename;
+                if (System.IO.File.Exists(temppath + filename))
+                {
+                    System.IO.File.Delete(path);
+                }
+                editedpicture.SaveAs(path);
+                FalconUtils.UploadToFtp("/Freelancers/Pics/", path);
+                if (member.Document == null)
+                {
+                    doc = new Document
+                    {
+                        path = "/Freelancers/Pics/" + filename,
+                        type = "profilepic"
+                    };
+                }
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            member.firstname = collection["firstname"];
+            member.lastname = collection["lastname"];
+            UserManager.Update(member);
+            falconService.UnitOfWork.Commit();
+            falconService.EditFreelancer(freelancer);
+            return RedirectToAction("Details", new { id = freelancer.idMember });
         }
 
         // GET: Freelancer/Delete/5

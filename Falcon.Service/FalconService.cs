@@ -195,5 +195,29 @@ namespace Falcon.Service
             unitOfWork.Commit();
         }
         #endregion
+
+        //Mission Region
+        #region
+
+        public List<Mission> GetMissions()
+        {
+            return unitOfWork.MissionRepository.GetAll().ToList();
+        }
+
+        public List<Mission> GetMissionsByCategory(string categoryName)
+        {
+            return unitOfWork.MissionRepository.GetMany(m => m.Category.name == categoryName).ToList();
+        }
+        public List<Mission> GetMissionsByBudget(double budget)
+        {
+            return unitOfWork.MissionRepository.GetMany(m => m.budget > budget).ToList();
+        }
+        public List<Mission> GetMissionsByCategoryNameAndBudget(string categoryName, double budget)
+        {
+
+            return unitOfWork.MissionRepository.GetMany(m => m.Category.name == categoryName && m.budget > budget).ToList();
+        }
+
+        #endregion
     }
 }
